@@ -1,0 +1,25 @@
+<div class="skill-arcade-logo">Skill Arcade</div>
+<div class="login-container">
+    <h2>{{ isForgotPassword ? 'Forgot Password' : 'Login' }}</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="username">Username</label>
+        <input id="username" type="text" placeholder="Enter your username" formControlName="username" />
+      </div>
+      
+      <div *ngIf="!isForgotPassword">
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Enter your password" formControlName="password" />
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      
+      <button type="submit">{{ isForgotPassword ? 'Reset Password' : 'Sign In' }}</button>
+    </form>
+
+    <div class="links">
+        <a *ngIf="!isForgotPassword" (click)="forgotPassword()" class="forgot-password">Forgot Password?</a>
+        <a *ngIf="isForgotPassword" (click)="cancelForgotPassword()" class="forgot-password">Back to Login</a> |
+        <a (click)="navigateToSignup()" class="signup-link">New user? Sign up here</a>
+    </div>
+</div>
