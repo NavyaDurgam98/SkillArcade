@@ -1,1 +1,74 @@
+<div class="skill-arcade-logo">Skill Arcade</div>
+<div class="signup-container">
+  <h2>Sign Up</h2>
+  
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
 
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" formControlName="firstName" type="text" placeholder="Enter first name" />
+      <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+        First name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" formControlName="lastName" type="text" placeholder="Enter last name" />
+      <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
+        Last name is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email" placeholder="Enter email" />
+      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+        Valid email is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input id="dob" formControlName="dob" type="date" />
+      <div *ngIf="signupForm.get('dob')?.invalid && signupForm.get('dob')?.touched">
+        Date of birth is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="gender-options">
+        <label><input type="radio" formControlName="gender" value="Male" /> Male</label>
+        <label><input type="radio" formControlName="gender" value="Female" /> Female</label>
+        <label><input type="radio" formControlName="gender" value="Other" /> Other</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" formControlName="username" type="text" placeholder="Enter username" />
+      <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+        Username is required.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" type="password" placeholder="Enter password" />
+      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+        Password must be at least 6 characters.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+  </form>
+</div>
