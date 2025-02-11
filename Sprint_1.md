@@ -10,7 +10,7 @@
 - These user stories can be found under the issues tab with the label [userstories](https://github.com/NavyaDurgam98/SkillArcade/issues) in this repository.
 
 
-## Issues Planned to Address  
+## Stories & Issues Planned to Address  
  
 ### User Authentication Implementation  
 - Develop APIs for **SignUp, SignIn, Forgot Password, and Reset Password**.  
