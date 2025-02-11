@@ -7,7 +7,8 @@
 ## User Stories:
 - Created 7 user stories spanning the features/user requirements of the Skill Arcade application. 
 - Addition of more user stories depends on the scope of the project and resource availability in the future. 
-- These user stories can be found under the issues tab with the label [userstories](https://github.com/ssaditya/Ecommute-SE_Project/issues?q=is%3Aopen+is%3Aissue+label%3A%22user+stories%22) in this repository.
+- These user stories can be found under the issues tab with the label [userstories](https://github.com/NavyaDurgam98/SkillArcade/issues) in this repository.
+
 
 ## Development:
 ### Backend:  
