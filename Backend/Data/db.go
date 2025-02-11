@@ -6,29 +6,34 @@ import (
 	"log"
 	"os"
 	"time"
-
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/joho/godotenv"
 )
 
 var Client *mongo.Client
+var DBName string
 
 // ConnectToDB connects to MongoDB Atlas and sets the global Client variable
 func ConnectToDB() {
-	var err error
+
+  err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	// Get MongoDB credentials from environment variables
 	mongoUser := os.Getenv("MONGO_USER")
 	mongoPassword := os.Getenv("MONGO_PASSWORD")
 	mongoCluster := os.Getenv("MONGO_CLUSTER")
 
-	// Replace <username>, <password>, <cluster-url>, and <dbname> with your actual details
+	//connect to DB
+	ctx, cancel := context.WithTimeout(context.Background(), 1000*time.Second)
+	defer cancel()
 	uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/?retryWrites=true&w=majority",
 		mongoUser, mongoPassword, mongoCluster)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 1000*time.Second)
-	defer cancel()
 	// Create a new MongoDB client
 	Client, err = mongo.Connect(ctx, options.Client().ApplyURI(uri))
 	if err != nil {

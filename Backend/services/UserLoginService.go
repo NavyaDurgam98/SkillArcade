@@ -3,6 +3,7 @@ package services
 import (
 	"BACKEND/Data"
 	"BACKEND/models"
+	"BACKEND/utils"
 	"context"
 	"errors"
 
@@ -27,5 +28,12 @@ func UserLoginService(c context.Context, user *models.UserLogin) (string, error)
 		//c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid password"})
 		return user.Username, errors.New("invalid password")
 	}
-	return user.Username, nil
+	// Generate JWT token
+	token, err := utils.GenerateJWT(user.Username, user.Username)
+	if err != nil {
+		return "", err
+	}
+
+	return token, nil
+	//return user.Username, nil
 }
