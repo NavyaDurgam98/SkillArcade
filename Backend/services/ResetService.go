@@ -18,7 +18,7 @@ func ResetPasswordService(c context.Context, resetData *models.UserReset) (strin
 	_, err := userDetailsCollection.UpdateOne(c, bson.M{"email": resetData.Email}, updatePassword)
 	if err != nil {
 		//c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating password"})
-		return resetData.Email, errors.New("Error updating password")
+		return resetData.Email, errors.New("error updating password")
 	}
 	return resetData.Email, nil
 }

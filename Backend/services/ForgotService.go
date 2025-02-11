@@ -21,7 +21,7 @@ func ForgotPasswordService(c context.Context, requestData requestData) (string, 
 	err := userDetailsCollection.FindOne(c, bson.M{"email": requestData.Email}).Decode(&userExists)
 	if err != nil {
 		//c.JSON(http.StatusUnauthorized, gin.H{"error": "Email not found"})
-		return "", errors.New("Email not found")
+		return "", errors.New("email not found")
 	}
 
 	//static token for temporary use

@@ -3,6 +3,7 @@ package main
 import (
 	"BACKEND/Data"
 	"BACKEND/controllers"
+	"BACKEND/middlewares"
 	"log"
 	"net/http" // handles http requests and responses
 
@@ -12,8 +13,7 @@ import (
 
 func main() {
 
-	var err error
-	err = godotenv.Load()
+	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -29,11 +29,21 @@ func main() {
 	controllers.ForgotRouter(r)
 	controllers.ResetRouter(r)
 
-	// Sample routes
-	r.GET("/", func(c *gin.Context) { // func(c *gin.Context) request handler function, c is pointer to gin.Context which provides varoius methods to handle http,query,json etc.
-		c.JSON(http.StatusOK, gin.H{"message": "Welcome to my API!"})
-	})
+	// Protected routes (require JWT authentication)
+	protected := r.Group("/api")
+	protected.Use(middlewares.JWTMiddleware())
+	{
+		protected.GET("/dashboard", func(c *gin.Context) {
+			username, _ := c.Get("username")
+			c.JSON(http.StatusOK, gin.H{"message": "Welcome to the Dashboard!", "user": username})
+		})
+	}
 
-	// Run server on port 8080
+	// Sample routes
+	// r.GET("/", func(c *gin.Context) { // func(c *gin.Context) request handler function, c is pointer to gin.Context which provides varoius methods to handle http,query,json etc.
+	// 	c.JSON(http.StatusOK, gin.H{"message": "Welcome to my API!"})
+	// })
+
+	// Run server on port 8080s
 	r.Run()
 }
