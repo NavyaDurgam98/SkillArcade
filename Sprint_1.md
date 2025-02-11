@@ -18,11 +18,9 @@
 - Implemented JWT authentication for session-based sign-in.  
 - Integrated Twilio (a third-party mailing API) to handle Forgot Password requests.
 ### FrontEnd:
-- Did the initial setup of the react application and installed required libraries/dependencies.
-- Created the MainComponent and set up the routing paths.
-- Created the Home Screen Page with the driver and rider modes.
-- Developed the HeaderComponent.
-- Created and partially developed the DriverComponent, RiderComponent with their respective navbars.
+-Set up Angular by installing Node.js and Angular CLI, creating a project with ng new, and running ng serve.
+-Created three components: App, Login, and Signup, where the App component is the main one, and routing happens here.
+-Validation for all pages is done, and the user is displayed with error messages when they miss the required fields.
 ## Testing:
 - Tested test-API using Postman and validated respective changes in DB.
 - Tested CRUD operations in DB by calling APIs through Postman.
