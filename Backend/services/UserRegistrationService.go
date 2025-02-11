@@ -18,7 +18,7 @@ func UserRegistrationService(c context.Context, user *models.UserRegister) (stri
 	err := userDetailsCollection.FindOne(c, bson.M{"email": user.Email}).Decode(&existingUser)
 	if err == nil {
 		//c.JSON(http.StatusConflict, gin.H{"error": "Email already exists"})
-		return user.FirstName, errors.New("Email already exists")
+		return user.FirstName, errors.New("email already exists")
 	}
 
 	//create user object to insert in DB
@@ -36,7 +36,7 @@ func UserRegistrationService(c context.Context, user *models.UserRegister) (stri
 	_, err = userDetailsCollection.InsertOne(c, userData)
 	if err != nil {
 		//c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating user"})
-		return user.FirstName, errors.New("Error creating user")
+		return user.FirstName, errors.New("error creating user")
 	}
 	return user.FirstName, nil
 }
