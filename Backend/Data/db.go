@@ -6,10 +6,9 @@ import (
 	"log"
 	"os"
 	"time"
-
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-
 	"github.com/joho/godotenv"
 )
 
@@ -18,10 +17,8 @@ var DBName string
 
 // ConnectToDB connects to MongoDB Atlas and sets the global Client variable
 func ConnectToDB() {
-	var err error
 
-	// Load environment variables from .env file
-	err = godotenv.Load()
+  err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
@@ -31,25 +28,36 @@ func ConnectToDB() {
 	mongoPassword := os.Getenv("MONGO_PASSWORD")
 	mongoCluster := os.Getenv("MONGO_CLUSTER")
 
-	// Replace <username>, <password>, <cluster-url>, and <dbname> with your actual details
-	//uri := "mongodb+srv://baddamtejasri:skillarcade@cluster0.cw3xm.mongodb.net/?retryWrites=true&w=majority"
+	//connect to DB
+	ctx, cancel := context.WithTimeout(context.Background(), 1000*time.Second)
+	defer cancel()
 	uri := fmt.Sprintf("mongodb+srv://%s:%s@%s/?retryWrites=true&w=majority",
 		mongoUser, mongoPassword, mongoCluster)
 
 	// Create a new MongoDB client
-	Client, err = mongo.NewClient(options.Client().ApplyURI(uri))
+	Client, err = mongo.Connect(ctx, options.Client().ApplyURI(uri))
 	if err != nil {
 		log.Fatal("Error creating MongoDB client:", err)
 	}
 
 	// Connect to MongoDB
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-	err = Client.Connect(ctx)
+	err = Client.Ping(ctx, nil)
 	if err != nil {
 		log.Fatal("Error connecting to MongoDB:", err)
 	}
 	fmt.Println("Connected to MongoDB!")
+
+	passwordResetTokenCollection := GetCollection("SkillArcade", "PasswordResetToken")
+	indexModel := mongo.IndexModel{
+		Keys:    bson.M{"expires_at": 1},                  // Index on "expires_at" field
+		Options: options.Index().SetExpireAfterSeconds(0), // Auto-delete expired documents
+	}
+
+	_, err = passwordResetTokenCollection.Indexes().CreateOne(ctx, indexModel)
+	if err != nil {
+		log.Fatal("Error creating TTL index:", err)
+	}
+
 }
 
 // GetDatabase returns a MongoDB database
