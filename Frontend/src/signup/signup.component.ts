@@ -33,6 +33,10 @@ export class SignupComponent {
   }
 
   onSubmit() {
+    Object.keys(this.loginForm.controls).forEach(field => {
+      const control = this.loginForm.get(field);
+      control?.markAsTouched();
+    });
     if (this.signupForm.valid) {
       this.http.post('http://localhost:8080/signup', this.signupForm.value)
         .subscribe({
