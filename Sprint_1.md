@@ -6,7 +6,7 @@
 
 ## User Stories:
 - Created 7 user stories spanning the features/user requirements of the Skill Arcade application. 
-- Additional user stories were introduced in the Later sprint to address emerging requirements, refine existing features, and ensure better alignment with project goals and user needs.
+- Additional user stories will be introduced in the Later sprints to address emerging requirements, refine existing features, and ensure better alignment with project goals and user needs.
 - These user stories can be found under the issues tab with the label [userstories](https://github.com/NavyaDurgam98/SkillArcade/issues) in this repository.
 
 
