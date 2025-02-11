@@ -1,15 +1,23 @@
-<div class="skill-arcade-logo">Skill Arcade</div>
-<div class="login-container">
+<div class="Logo">SkillArcade</div>
+<div class="login-section">
     <h2>{{ isForgotPassword ? 'Forgot Password' : 'Login' }}</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="username">Username</label>
-        <input id="username" type="text" placeholder="Enter your username" formControlName="username" />
+      <div >
+        <label for="username">Username<span class="required">*</span></label>
+        <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error-message">
+          Username is required
+        </div>
+        <input id="username" type="text" placeholder="Enter your username" formControlName="username" required/>
+        
       </div>
       
       <div *ngIf="!isForgotPassword">
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Enter your password" formControlName="password" />
+        <label for="password">Password<span class="required">*</span></label>
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-message">
+          Password is required
+        </div>
+        <input id="password" type="password" placeholder="Enter your password" formControlName="password" required/>
+        
       </div>
 
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

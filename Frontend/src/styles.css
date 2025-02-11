@@ -1,24 +1,23 @@
-/* Light Green Background */
+.Logo {
+    position: absolute;
+    font-weight: bold;
+    color:#00008B; 
+    font-family: 'Georgia', serif; 
+    top: 20px;
+    left: 20px;
+    font-size: 40px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(93, 64, 55, 1); 
+  }
+  
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #d4edda; /* Lightened Green */
-    margin: 0;
-    height: 100vh;
+    background: #e4ebf4;  
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-  }
-  
-  /* Skill Arcade Branding - Positioned at the Top Left */
-  .skill-arcade-logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #007a00;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    margin: 0;
+    height: 115vh;
   }
   
