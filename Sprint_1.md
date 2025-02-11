@@ -69,7 +69,7 @@ While significant progress was made, the following issues were not completed due
 
 ## Reasons for Incompletion  
 
-- Since our team was working with **Go** and **Angular** for the first time, a significant portion of the sprint was spent learning these technologies, setting up the project structure, and understanding best practices.  
+- Since team was working with **Go** and **Angular** for the first time, a significant portion of the sprint was spent learning these technologies, setting up the project structure, and understanding best practices.  
 
 - Initial time was spent getting familiar with **Git workflows** and setting up the directory structure properly.  
 
@@ -84,7 +84,7 @@ While significant progress was made, the following issues were not completed due
 Despite these challenges, **Sprint 1 was successful** in establishing a solid foundation for the project.  
 
 Moving forward, our focus will be on:  
-- Completing the **pending tasks**.  
+- Completing the **Backlog tasks**.  
 - Resolving **CORS issues**.  
 - Further improving **frontend-backend integration**.  
 
