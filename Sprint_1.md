@@ -41,7 +41,7 @@
 ### Backend:  
 - Set up Go using the Gin/Gonic framework and MongoDB as the database.  
 - Established a database connection and implemented four API routes.  
-- Created a test API with a POST operation to store data in the database.  
+- Created test API's with a POST operation to store data in the database.  
 - Developed SignUp, SignIn, Forgot Password, and Reset Password APIs.  
 - Implemented JWT authentication for session-based sign-in.  
 - Integrated Twilio (a third-party mailing API) to handle Forgot Password requests.
