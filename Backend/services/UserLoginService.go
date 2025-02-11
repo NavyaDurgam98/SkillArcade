@@ -19,13 +19,13 @@ func UserLoginService(c context.Context, user *models.UserLogin) (string, error)
 	err := userDetailsCollection.FindOne(c, bson.M{"username": user.Username}).Decode(&userExists)
 	if err != nil {
 		//c.JSON(http.StatusUnauthorized, gin.H{"error": "Email not found"})
-		return user.Username, errors.New("User not found")
+		return user.Username, errors.New("user not found")
 	}
 
 	// Check if the passwords match
 	if userExists["password"] != user.Password {
 		//c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid password"})
-		return user.Username, errors.New("Invalid password")
+		return user.Username, errors.New("invalid password")
 	}
 	return user.Username, nil
 }

@@ -3,13 +3,18 @@ package main
 import (
 	"BACKEND/Data"
 	"BACKEND/controllers"
+	"log"
 	"net/http" // handles http requests and responses
 
 	"github.com/gin-gonic/gin" // for using gin framework
+	"github.com/joho/godotenv"
 )
 
 func main() {
-
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	//Intialize DB connection
 	Data.ConnectToDB()
 
