@@ -18,9 +18,11 @@
 - Implemented JWT authentication for session-based sign-in.  
 - Integrated Twilio (a third-party mailing API) to handle Forgot Password requests.
 ### FrontEnd:
--Set up Angular by installing Node.js and Angular CLI, creating a project with ng new, and running ng serve.
--Created three components: App, Login, and Signup, where the App component is the main one, and routing happens here.
--Validation for all pages is done, and the user is displayed with error messages when they miss the required fields.
+- Set up Angular by installing Node.js and Angular CLI, creating a project with ng new, and running ng serve.  
+- Created three components: App, Login, and Signup, where the App component is the main one, and routing happens here.  
+- Created three components: App, Login, and Signup, where the App component is the main one, and routing happens here.  
+- Validation for all pages is done, and the user is displayed with error messages when they miss the required fields..  
+
 ## Testing:
 - Tested test-API using Postman and validated respective changes in DB.
 - Tested CRUD operations in DB by calling APIs through Postman.
