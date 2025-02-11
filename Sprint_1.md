@@ -58,7 +58,7 @@
 
 While significant progress was made, the following issues were not completed due to time constraints and learning curve challenges:  
 
-### Frontend Pending Tasks  
+### Frontend Out of Scope Tasks  
 - **Dashboard development is still in progress** *(out of Sprint 1 scope)*.  
 - **CORS issues** are causing API request failures *(out of Sprint 1 scope)*.  
 
@@ -69,13 +69,14 @@ While significant progress was made, the following issues were not completed due
 
 ## Reasons for Incompletion  
 
-- **Time Investment in Learning**: Since our team was working with **Go** and **Angular** for the first time, a significant portion of the sprint was spent learning these technologies, setting up the project structure, and understanding best practices.  
+- Since our team was working with **Go** and **Angular** for the first time, a significant portion of the sprint was spent learning these technologies, setting up the project structure, and understanding best practices.  
 
-- **Version Control and Collaboration Challenges**: Initial time was spent getting familiar with **Git workflows** and setting up the directory structure properly.  
+- Initial time was spent getting familiar with **Git workflows** and setting up the directory structure properly.  
 
-- **Integration Complexity**: Integrating **MongoDB with Go** and structuring **API requests for the frontend** required additional time and debugging.  
+- Integrating **MongoDB with Go** and structuring **API requests for the frontend** required additional time and debugging.  
 
-- **Unforeseen Bugs**: Issues like **routing errors in Angular** and **API CORS restrictions** delayed progress in API integration.  
+- Issues like **routing errors in Angular** and **API CORS restrictions** delayed progress in API integration.  
+
 
 
 ## Closing Note  
