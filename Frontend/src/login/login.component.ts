@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class LoginComponent {
-  //re-do API integration once CORS issue is fixed.
   loginForm: FormGroup;
   isForgotPassword = false;
   errorMessage = '';
@@ -20,8 +19,10 @@ export class LoginComponent {
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]] 
     });
+    this.loginForm.get('email')?.disable();
   }
 
   navigateToSignup() {
@@ -31,11 +32,13 @@ export class LoginComponent {
   forgotPassword() {
     this.isForgotPassword = true;
     this.loginForm.get('password')?.disable();
+    this.loginForm.get('email')?.enable();  
   }
 
   cancelForgotPassword() {
     this.isForgotPassword = false;
     this.loginForm.get('password')?.enable();
+    this.loginForm.get('email')?.disable();  
   }
 
   onSubmit() {
@@ -44,17 +47,14 @@ export class LoginComponent {
       control?.markAsTouched();
     });
     if (this.isForgotPassword) {
-      const username = this.loginForm.get('username')?.value;
-      if (!username) {
-        this.errorMessage = 'Please enter your username to reset the password.';
-        return;
-      }
-      this.http.post('http://localhost:8080/api/forgot-password', { username })
+      const email = this.loginForm.get('email')?.value;
+      this.http.post('http://localhost:8080/forgotpassword', { email })
         .subscribe({
           next: () => {
             alert('Password reset instructions have been sent to your email.');
             this.isForgotPassword = false;
-            this.loginForm.get('password')?.enable();
+            // redirect to reset password instead of the below method
+            this.cancelForgotPassword();
           },
           error: () => {
             this.errorMessage = 'Error resetting password. Please try again later.';
