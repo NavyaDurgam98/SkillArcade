@@ -33,8 +33,8 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    Object.keys(this.loginForm.controls).forEach(field => {
-      const control = this.loginForm.get(field);
+    Object.keys(this.signupForm.controls).forEach(field => {
+      const control = this.signupForm.get(field);
       control?.markAsTouched();
     });
     if (this.signupForm.valid) {
