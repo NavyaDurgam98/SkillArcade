@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/models"
 	"BACKEND/services"
 	"net/http"
 
@@ -8,9 +9,7 @@ import (
 )
 
 func ForgotPassword(c *gin.Context) {
-	var requestData struct {
-		Email string `json:"email" bindind:"required"`
-	}
+	var requestData models.UserForgot
 
 	// Bind the email address from the request body
 	if err := c.ShouldBindJSON(&requestData); err != nil {
@@ -19,7 +18,7 @@ func ForgotPassword(c *gin.Context) {
 	}
 
 	//connect to service to validate in db
-	resetToken, err := services.ForgotPasswordService(c.Request.Context(), requestData)
+	resetToken, err := services.ForgotPasswordService(c.Request.Context(), &requestData)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

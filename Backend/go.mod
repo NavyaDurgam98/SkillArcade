@@ -3,9 +3,12 @@ module BACKEND
 go 1.23.5
 
 require (
-	github.com/gin-gonic/gin v1.10.0
-	go.mongodb.org/mongo-driver v1.17.2
+	github.com/gin-gonic/gin v1.10.0 // framework
+	github.com/joho/godotenv v1.5.1
+	go.mongodb.org/mongo-driver v1.17.2 // Database
 )
+
+require github.com/sendgrid/rest v2.6.9+incompatible // indirect
 
 require (
 	github.com/bytedance/sonic v1.12.8 // indirect
@@ -17,9 +20,8 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.24.0 // indirect
 	github.com/goccy/go-json v0.10.4 // indirect
-	github.com/golang-jwt/jwt/v5 v5.2.1 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/golang/snappy v0.0.4 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.9 // indirect
@@ -29,6 +31,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
+	github.com/sendgrid/sendgrid-go v3.16.0+incompatible
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect

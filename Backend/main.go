@@ -8,7 +8,7 @@ import (
 	"net/http" // handles http requests and responses
 
 	"github.com/gin-gonic/gin" // for using gin framework
-	"github.com/joho/godotenv" // Load .env file
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -17,12 +17,14 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
 	//Intialize DB connection
 	Data.ConnectToDB()
 
 	// initializes a new Gin router for handling incoming API's
 	r := gin.Default()
+
+	// Apply CORS middleware globally
+	r.Use(middlewares.CORSMiddleware())
 
 	controllers.UserLoginRouter(r)
 	controllers.UserRegisterRouter(r)

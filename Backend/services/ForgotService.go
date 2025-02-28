@@ -2,18 +2,20 @@ package services
 
 import (
 	"BACKEND/Data"
+	"BACKEND/models"
 	"context"
 	"errors"
+	"fmt"
+	"os"
 
+	"github.com/sendgrid/sendgrid-go"
+	"github.com/sendgrid/sendgrid-go/helpers/mail"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
-type requestData struct {
-	Email string `json:"email" bindind:"required"`
-}
+func ForgotPasswordService(c context.Context, requestData *models.UserForgot) (string, error) {
 
-func ForgotPasswordService(c context.Context, requestData requestData) (string, error) {
-	// Access MongoDB collection
+	//Access MongoDB collection
 	userDetailsCollection := Data.GetCollection("SkillArcade", "UserDetails")
 
 	// check if user exists in DB
@@ -24,8 +26,43 @@ func ForgotPasswordService(c context.Context, requestData requestData) (string, 
 		return "", errors.New("email not found")
 	}
 
-	//static token for temporary use
-	resetToken := "reset_token_123456"
+	token, err := PasswordResetToken(requestData)
+	if err != nil {
+		return "", err
+	}
 
-	return resetToken, nil
+	err = SendResetEmail(requestData, token)
+
+	if err != nil {
+		return "", errors.New("failed to send email")
+	} else {
+		return "Reset email sent successfully!", err
+	}
+
+}
+
+func SendResetEmail(requestData *models.UserForgot, token string) error {
+
+	from := mail.NewEmail("Skillarcade", "spabbathi@ufl.edu") // Sender email
+	to := mail.NewEmail("User", requestData.Email)            // Recipient email
+
+	subject := "Password Reset Request"
+	resetLink := fmt.Sprintf("https://skillarcade.com/reset-password?token=%s", token)
+
+	// Email content
+	plainTextContent := fmt.Sprintf("Click the link below to reset your password:\n\n%s\n\nThis link expires in 15 minutes.", resetLink)
+	htmlContent := fmt.Sprintf("<p>Click the link below to reset your password:</p><p><a href='%s'>Reset Password</a></p><p>This link expires in 15 minutes.</p>", resetLink)
+
+	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+
+	// Replace with your SendGrid API Key
+	apiKey := os.Getenv("SENDGRID_API_KEY")
+	client := sendgrid.NewSendClient(apiKey)
+
+	// Send the email
+	_, err := client.Send(message)
+	if err != nil {
+		return err
+	}
+	return nil
 }
