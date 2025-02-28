@@ -2,16 +2,24 @@
 <div class="login-section">
     <h2>{{ isForgotPassword ? 'Forgot Password' : 'Login' }}</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div >
-        <label for="username">Username<span class="required">*</span></label>
-        <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error-message">
-          Username is required
+      
+      <div *ngIf="isForgotPassword">
+        <label for="email">Email<span class="required">*</span></label>
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error-message">
+          A valid email is required
         </div>
-        <input id="username" type="text" placeholder="Enter your username" formControlName="username" required/>
-        
+        <input id="email" type="email" placeholder="Enter your email" formControlName="email" required/>
       </div>
       
       <div *ngIf="!isForgotPassword">
+        <div >
+          <label for="username">Username<span class="required">*</span></label>
+          <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error-message">
+            Username is required
+          </div>
+          <input id="username" type="text" placeholder="Enter your username" formControlName="username" required/>
+          
+        </div>
         <label for="password">Password<span class="required">*</span></label>
         <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-message">
           Password is required
