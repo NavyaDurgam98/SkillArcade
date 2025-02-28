@@ -9,6 +9,6 @@ import { DashboardComponent } from './dashboard.component';
     CommonModule,
     RouterModule 
   ],
-  exports: [DashboardComponent] 
+  exports: [DashboardComponent]
 })
-export class QuizModule { }
+export class DashboardModule { }
