@@ -122,15 +122,348 @@
                     },
                     {
                         "quiz_topic": "Java",
-                        "questions": []
+                        "questions": [
+                            {
+                                "question": "What is the output of cout << 2 + 'A'; in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "2A"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "67"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "C2"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "Compilation Error"
+                                    }
+                                ],
+                                "correct_option": 2
+                            },
+                            {
+                                "question": "Which keyword is used to prevent a function from modifying member variables in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "mutable"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "static"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "const"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "volatile"
+                                    }
+                                ],
+                                "correct_option": 3
+                            },
+                            {
+                                "question": "What is the size of an empty class in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "0 bytes"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "1 byte"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "Compiler-dependent"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "Undefined behavior"
+                                    }
+                                ],
+                                "correct_option": 2
+                            },
+                            {
+                                "question": "Which of the following is true about C++ constructors?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "They must have a return type"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "They can be virtual"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "They are automatically called when an object is created"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "They cannot be overloaded"
+                                    }
+                                ],
+                                "correct_option": 3
+                            },
+                            {
+                                "question": "What is the default access specifier for class members in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "public"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "private"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "protected"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "None of the above"
+                                    }
+                                ],
+                                "correct_option": 2
+                            }
+                        ]
                     },
                     {
                         "quiz_topic": "Python",
-                        "questions": []
+                        "questions": [
+                            {
+                                "question": "What is the output of cout << 2 + 'A'; in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "2A"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "67"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "C2"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "Compilation Error"
+                                    }
+                                ],
+                                "correct_option": 2
+                            },
+                            {
+                                "question": "Which keyword is used to prevent a function from modifying member variables in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "mutable"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "static"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "const"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "volatile"
+                                    }
+                                ],
+                                "correct_option": 3
+                            },
+                            {
+                                "question": "What is the size of an empty class in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "0 bytes"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "1 byte"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "Compiler-dependent"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "Undefined behavior"
+                                    }
+                                ],
+                                "correct_option": 2
+                            },
+                            {
+                                "question": "Which of the following is true about C++ constructors?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "They must have a return type"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "They can be virtual"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "They are automatically called when an object is created"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "They cannot be overloaded"
+                                    }
+                                ],
+                                "correct_option": 3
+                            },
+                            {
+                                "question": "What is the default access specifier for class members in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "public"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "private"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "protected"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "None of the above"
+                                    }
+                                ],
+                                "correct_option": 2
+                            }
+                        ]
                     },
                     {
                         "quiz_topic": "C#",
-                        "questions": []
+                        "questions": [
+                            {
+                                "question": "What is the output of cout << 2 + 'A'; in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "2A"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "67"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "C2"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "Compilation Error"
+                                    }
+                                ],
+                                "correct_option": 2
+                            },
+                            {
+                                "question": "Which keyword is used to prevent a function from modifying member variables in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "mutable"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "static"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "const"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "volatile"
+                                    }
+                                ],
+                                "correct_option": 3
+                            },
+                            {
+                                "question": "What is the size of an empty class in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "0 bytes"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "1 byte"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "Compiler-dependent"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "Undefined behavior"
+                                    }
+                                ],
+                                "correct_option": 2
+                            },
+                            {
+                                "question": "Which of the following is true about C++ constructors?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "They must have a return type"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "They can be virtual"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "They are automatically called when an object is created"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "They cannot be overloaded"
+                                    }
+                                ],
+                                "correct_option": 3
+                            },
+                            {
+                                "question": "What is the default access specifier for class members in C++?",
+                                "options": [
+                                    {
+                                        "option_id": 1,
+                                        "value": "public"
+                                    },
+                                    {
+                                        "option_id": 2,
+                                        "value": "private"
+                                    },
+                                    {
+                                        "option_id": 3,
+                                        "value": "protected"
+                                    },
+                                    {
+                                        "option_id": 4,
+                                        "value": "None of the above"
+                                    }
+                                ],
+                                "correct_option": 2
+                            }
+                        ]
                     }
                 ]
             },
