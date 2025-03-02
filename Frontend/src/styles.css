@@ -10,9 +10,11 @@
     text-shadow: 0 0 10px rgba(93, 64, 55, 1); 
   }
   
-/* body {
-    font-family: 'Poppins', sans-serif;
-    background: #e4ebf4;  
+
+body {
+    /* font-family: 'Poppins', sans-serif; */
+    /* background: #e4ebf4;   */
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
