@@ -30,6 +30,7 @@ func main() {
 	controllers.UserRegisterRouter(r)
 	controllers.ForgotRouter(r)
 	controllers.ResetRouter(r)
+	controllers.QuizQuestionsRouter(r)
 
 	// Protected routes (require JWT authentication)
 	protected := r.Group("/api")
