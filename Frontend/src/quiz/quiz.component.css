@@ -72,12 +72,12 @@
     margin-bottom: 2rem;
     margin-left: 1rem;
     text-decoration: none;
-    
+    border: none;
     
   }
   
   .btn-primary:hover {
-    background-color: #0056b3; 
+    background-color: #272844; 
   }
 
    .card-text{
