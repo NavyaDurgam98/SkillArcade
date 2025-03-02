@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class TakequizService {
 
-  private jsonUrl = 'assets/quizdata.json';
+  private jsonUrl = 'assets/quiz_data.json';
 
   constructor(private http: HttpClient) { }
 
