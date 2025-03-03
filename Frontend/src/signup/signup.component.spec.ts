@@ -34,7 +34,8 @@ describe('SignupComponent', () => {
       dob: '',
       gender: '',
       username: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     });
   });
 
