@@ -69,3 +69,4 @@ func GetDatabase(dbName string) *mongo.Database {
 func GetCollection(dbName, collectionName string) *mongo.Collection {
 	return GetDatabase(dbName).Collection(collectionName)
 }
+
