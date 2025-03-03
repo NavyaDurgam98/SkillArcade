@@ -25,7 +25,7 @@
   - Integrated the backend API to fetch **categories and quiz topics**.
   - Ensured smooth **state management** for navigation.
  
-### Frontend Testing:([[List of Frontend Unit Tests & cypress Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/34)](https://github.com/NavyaDurgam98/SkillArcade/issues/34))
+### Frontend Testing:([[List of Frontend Unit Tests & cypress Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/41)](https://github.com/NavyaDurgam98/SkillArcade/issues/41))
 - **Jasmine & Karma Unit Tests**:
   - Developed test cases for **Login, Signup, Dashboard, Category, Quiz and TakeQuiz Components**.
   - Ensured each component met expected functionality and behavior.
