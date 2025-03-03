@@ -7,12 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class TakequizService {
 
-  private jsonUrl = 'assets/quiz_data.json';
+  private baseUrl = 'http://localhost:8080/quiz';
 
   constructor(private http: HttpClient) { }
 
   // Fetch quiz data
-  getQuizData(): Observable<any> {
-    return this.http.get<any>(this.jsonUrl);
+  getQuizData(quizTopic: string): Observable<any> {
+    // return this.http.get<any>(`${this.baseUrl}/${quizTopic}`);
+    return this.http.get<any>(`${this.baseUrl}/Graphs`);
   }
 }
