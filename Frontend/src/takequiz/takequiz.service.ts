@@ -13,7 +13,7 @@ export class TakequizService {
 
   // Fetch quiz data
   getQuizData(quizTopic: string): Observable<any> {
-    // return this.http.get<any>(`${this.baseUrl}/${quizTopic}`);
-    return this.http.get<any>(`${this.baseUrl}/Graphs`);
+    return this.http.get<any>(`${this.baseUrl}/${quizTopic}`);
+    // return this.http.get<any>(`${this.baseUrl}/Graphs`);
   }
 }

@@ -33,6 +33,6 @@ describe('TakequizService', () => {
 
     const req = httpMock.expectOne('http://localhost:8080/quiz/Graphs');
     expect(req.request.method).toBe('GET');
-    req.flush(mockQuizData); // Respond with mock data
+    req.flush(mockQuizData);
   });
 });
