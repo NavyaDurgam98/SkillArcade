@@ -53,7 +53,7 @@ export class QuizComponent implements OnInit {
   }
 
   takeQuiz(quizTopic: string) {
-    console.log(`Navigating to: /${this.categoryName}/${this.subCategoryName}/${quizTopic}/takequiz`);
+    console.log(`Navigating to: /${this.categoryName}/${this.subCategoryName}/${quizTopic}`);
     this.router.navigate([`/${this.categoryName}/${this.subCategoryName}/${quizTopic}/takequiz`]);
   }
   

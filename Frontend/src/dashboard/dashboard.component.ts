@@ -17,17 +17,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private dashboardService: DashboardService, private router: Router) {}
 
-  // ngOnInit() {
-  //   this.dashboardService.getCategories().subscribe(
-  //     data => {
-  //       this.categories = data; // Storing categories from JSON
-  //       console.log("Fetched Categories:", this.categories); // Debugging log
-  //     },
-  //     error => {
-  //       console.error("Error fetching categories:", error);
-  //     }
-  //   );
-  // }
   ngOnInit() {
     this.dashboardService.getCategories().subscribe(data => {
       // Assign an image to each category dynamically
