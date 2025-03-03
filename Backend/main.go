@@ -13,25 +13,29 @@ import (
 
 func main() {
 
+	// Load environment variables
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	//Intialize DB connection
+
+	// Initialize DB connection
 	Data.ConnectToDB()
 
-	// initializes a new Gin router for handling incoming API's
+	// Initialize Gin router for handling incoming API requests
 	r := gin.Default()
 
 	// Apply CORS middleware globally
 	r.Use(middlewares.CORSMiddleware())
 
+	// User authentication routes
 	controllers.UserLoginRouter(r)
 	controllers.UserRegisterRouter(r)
 	controllers.ForgotRouter(r)
 	controllers.ResetRouter(r)
-
-	// Protected routes (require JWT authentication)
+	controllers.CategoryRouter(r)
+	controllers.SubCategoryRouter(r)
+	controllers.QuizTopicRouter(r)
 	protected := r.Group("/api")
 	protected.Use(middlewares.JWTMiddleware())
 	{
@@ -41,11 +45,6 @@ func main() {
 		})
 	}
 
-	// Sample routes
-	// r.GET("/", func(c *gin.Context) { // func(c *gin.Context) request handler function, c is pointer to gin.Context which provides varoius methods to handle http,query,json etc.
-	// 	c.JSON(http.StatusOK, gin.H{"message": "Welcome to my API!"})
-	// })
-
-	// Run server on port 8080s
-	r.Run()
+	// Run server on port 8080
+	r.Run(":8080")
 }
