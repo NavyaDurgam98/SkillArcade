@@ -10,9 +10,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func FetchQuizQuestions(c context.Context, quizTopic string) (*models.Quiz, error) {
-	collection := Data.GetCollection("SkillArcade", "QuizQuestions")
-
+func FetchQuizQuestions(c context.Context, collection *mongo.Collection, quizTopic string) (*models.Quiz, error) {
 	filter := bson.M{"quiz_topic": quizTopic}
 	var quiz models.Quiz
 
