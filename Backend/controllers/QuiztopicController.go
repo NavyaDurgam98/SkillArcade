@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/services"
 	"net/http"
 	"github.com/gin-gonic/gin"
@@ -8,10 +9,11 @@ import (
 
 // GetQuizTopics retrieves quiz topics for a specific category and subcategory
 func GetQuizTopics(c *gin.Context) {
+	collection := Data.GetCollection("SkillArcade", "Quizzes")
 	categoryName := c.Param("category")
 	subCategoryName := c.Param("sub_category")
 	// Fetch quiz topics from the service
-	quizTopics, err := services.FetchQuizTopics(c, categoryName, subCategoryName)
+	quizTopics, err := services.FetchQuizTopics(c, categoryName, subCategoryName,collection)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
