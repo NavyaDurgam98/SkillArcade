@@ -12,7 +12,141 @@
 
 
 ## Detailed Devlopment
- 
+### Backend Development  
+- **Database**:
+  - Quizzes Collection - This collection includes categories of technologies, their sub-categories and Quiz topics under each sub category. Each quiz topic has quiz_topic_name and a unique quiz_topic_id.  
+  - QuizQuestions Collection - This collection includes all the questions for a particular quiz topic.
+  - QuizQuestions collection's _id corresponds to quiz_topic_id in Quizzes Collection.
+  
+Quizzes Collection  
+```json
+{
+  "_id": {
+    "$oid": "67c5fd94b35fea672a80a3ea"
+  },
+  "category": "Computer Science",
+  "sub_categories": [
+    {
+      "sub_category": "Programming Languages",
+      "quiz_topics": [
+        {
+          "quiz_topic_id": {
+            "$oid": "67c5fd91b35fea672a80a3e1"
+          },
+          "quiz_topic_name": "C++"
+        },
+        {
+          "quiz_topic_id": {
+            "$oid": "67c5fd91b35fea672a80a3e2"
+          },
+          "quiz_topic_name": "Java"
+        },
+        {
+          "quiz_topic_id": {
+            "$oid": "67c5fd92b35fea672a80a3e3"
+          },
+          "quiz_topic_name": "Python"
+        },
+        {
+          "quiz_topic_id": {
+            "$oid": "67c5fd92b35fea672a80a3e4"
+          },
+          "quiz_topic_name": "C#"
+        }
+      ]
+    },
+    {
+      "sub_category": "Data Structures and Algorithms",
+      "quiz_topics": [
+        {
+          "quiz_topic_id": {
+            "$oid": "67c5fd92b35fea672a80a3e5"
+          },
+          "quiz_topic_name": "Arrays & Strings"
+        },
+        {
+          "quiz_topic_id": {
+            "$oid": "67c5fd92b35fea672a80a3e6"
+          },
+          "quiz_topic_name": "Graphs"
+        }
+      ]
+    }
+  ]
+}
+```
+QuizQuestions Collection
+```json
+{
+  "_id": {
+    "$oid": "67c5fd91b35fea672a80a3e1"
+  },
+  "quiz_topic": "C++",
+  "questions": [
+    {
+      "question": "What is the output of 'std::cout << 5/2;' in C++?",
+      "options": [
+        { "option_id": { "$numberInt": "1" }, "value": "2" },
+        { "option_id": { "$numberInt": "2" }, "value": "2.5" },
+        { "option_id": { "$numberInt": "3" }, "value": "2" },
+        { "option_id": { "$numberInt": "4" }, "value": "Compilation Error" }
+      ],
+      "correct_option": { "$numberInt": "1" }
+    },
+    {
+      "question": "Which keyword is used to prevent a function from being overridden?",
+      "options": [
+        { "option_id": { "$numberInt": "1" }, "value": "static" },
+        { "option_id": { "$numberInt": "2" }, "value": "const" },
+        { "option_id": { "$numberInt": "3" }, "value": "final" },
+        { "option_id": { "$numberInt": "4" }, "value": "volatile" }
+      ],
+      "correct_option": { "$numberInt": "3" }
+    },
+    {
+      "question": "Which of the following is not a valid C++ access specifier?",
+      "options": [
+        { "option_id": { "$numberInt": "1" }, "value": "public" },
+        { "option_id": { "$numberInt": "2" }, "value": "protected" },
+        { "option_id": { "$numberInt": "3" }, "value": "private" },
+        { "option_id": { "$numberInt": "4" }, "value": "internal" }
+      ],
+      "correct_option": { "$numberInt": "4" }
+    },
+    {
+      "question": "What does the 'new' keyword do in C++?",
+      "options": [
+        { "option_id": { "$numberInt": "1" }, "value": "Allocates memory" },
+        { "option_id": { "$numberInt": "2" }, "value": "Deallocates memory" },
+        { "option_id": { "$numberInt": "3" }, "value": "Initializes a variable" },
+        { "option_id": { "$numberInt": "4" }, "value": "None of the above" }
+      ],
+      "correct_option": { "$numberInt": "1" }
+    },
+    {
+      "question": "Which of the following is a C++ STL container?",
+      "options": [
+        { "option_id": { "$numberInt": "1" }, "value": "Stack" },
+        { "option_id": { "$numberInt": "2" }, "value": "Queue" },
+        { "option_id": { "$numberInt": "3" }, "value": "Vector" },
+        { "option_id": { "$numberInt": "4" }, "value": "All of the above" }
+      ],
+      "correct_option": { "$numberInt": "4" }
+    }
+  ]
+}
+```
+- **Dataset**:
+  -Quiz Dataset: This dataset used in this project was custom-built by us to ensure it aligns with the project's needs.
+- **API**'s:
+  Implemented API's to fetch quiz data like names of categories, sub-categories of each category, the quiz topics and the corresponding questions.
+
+### Backend Testing
+- **Testify & mtest**:
+  - Used **testify** suite for structured testing and **mtest** for mocking mongoDB interactions.
+  - The tests structure allows to thoroughly test database interactions , covering success and various failure scenarios, all without needing a real database.
+  - Code includes a complete test suite covering all services to validate their functionality and performance. These tests help maintain code quality and prevent regressions.
+
 ### Frontend Development  
 - Implemented **Technology Panels** with the following features:
   - **Dashboard Component** - Displays all the **domains** in Computer Science Engineering.
