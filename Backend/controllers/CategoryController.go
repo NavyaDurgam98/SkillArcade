@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/services"
 	"net/http"
 
@@ -10,7 +11,8 @@ import (
 
 
 func GetCategories(c *gin.Context) {
-	categories, err := services.FetchCategories(c)
+	collection := Data.GetCollection("SkillArcade", "Quizzes")
+	categories, err := services.FetchCategories(c,collection)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
