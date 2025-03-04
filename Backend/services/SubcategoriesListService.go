@@ -1,7 +1,7 @@
 package services
 
 import (
-	"BACKEND/Data"
+	// "BACKEND/Data"
 	"BACKEND/models"
 	"context"
 	"fmt"
@@ -9,8 +9,8 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 )
-func FetchSubCategories(c context.Context, categoryName string) ([]models.SubCategory, error) {
-	collection := Data.GetCollection("SkillArcade", "Quizzes")
+func FetchSubCategories(c context.Context, categoryName string,collection *mongo.Collection) ([]models.SubCategory, error) {
+	// collection := Data.GetCollection("SkillArcade", "Quizzes")
 	categoryName = strings.TrimSpace(categoryName)
 	filter := bson.M{"category": categoryName}
 
