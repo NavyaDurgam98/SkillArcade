@@ -1,7 +1,7 @@
 package services
 
 import (
-	"BACKEND/Data"
+	// "BACKEND/Data"
 	"context"
 	"fmt"
 
@@ -13,8 +13,8 @@ type CategoryOnly struct {
 	CategoryName string `json:"category" bson:"category"`
 }
 
-func FetchCategories(c context.Context) ([]CategoryOnly, error) {
-	collection := Data.GetCollection("SkillArcade", "Quizzes")
+func FetchCategories(c context.Context,collection *mongo.Collection) ([]CategoryOnly, error) {
+	// collection := Data.GetCollection("SkillArcade", "Quizzes")
 	filter := bson.M{}
 	findOptions := options.Find()
 	findOptions.SetProjection(bson.M{
