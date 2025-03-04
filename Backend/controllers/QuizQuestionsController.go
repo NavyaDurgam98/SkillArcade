@@ -13,7 +13,8 @@ func QuizQuestionsRouter(r *gin.Engine) {
 
 func GetQuizQuestions(c *gin.Context) {
 	quizTopic := c.Param("quizTopic")
-	quiz, err := services.FetchQuizQuestions(c, quizTopic)
+	collection := Data.GetCollection("SkillArcade", "QuizQuestions")
+	quiz, err := services.FetchQuizQuestions(c, collection, quizTopic)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
