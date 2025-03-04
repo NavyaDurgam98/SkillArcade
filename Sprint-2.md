@@ -2,7 +2,9 @@
 
 ## Visual Demo Links
 ## Visual Demo Links
-- - [Frontend]([https://drive.google.com/file/d/1wLm-qh37Ih8RsFMu-TMAoJNtcbJZStD_/view?usp=sharing](https://tinyurl.com/mrykh238))
+
+## Visual Demo Links
+- [DEMO](https://tinyurl.com/mrykh238)
 
 
 ## User Stories:
