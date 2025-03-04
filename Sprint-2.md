@@ -1,7 +1,7 @@
 # Sprint 2 Report
 
 ## Visual Demo Links
-- [DEMO]([https://drive.google.com/file/d/1wLm-qh37Ih8RsFMu-TMAoJNtcbJZStD_/view?usp=sharing](https://uflorida-my.sharepoint.com/:v:/g/personal/spabbathi_ufl_edu/EW5UU8vq8KREoVEEvIeVGNABJ3nnGEQryCOwQZz8kp5Zlg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=4vob65)
+- [DEMO]([https://drive.google.com/file/d/1wLm-qh37Ih8RsFMu-TMAoJNtcbJZStD_/view?usp=sharing](https://uflorida-my.sharepoint.com/:v:/g/personal/spabbathi_ufl_edu/EW5UU8vq8KREoVEEvIeVGNABJ3nnGEQryCOwQZz8kp5Zlg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=4vob65))
 
 ## User Stories:
 - Created 4 user stories spanning the features/user requirements of the Skill Arcade application. 
