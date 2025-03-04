@@ -2,8 +2,7 @@
 
 ## Visual Demo Links
 ## Visual Demo Links
-- [DEMO](https://uflorida-my.sharepoint.com/:v:/g/personal/spabbathi_ufl_edu/EW5UU8vq8KREoVEEvIeVGNABJ3nnGEQryCOwQZz8kp5Zlg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2
-- - [Backend]([https://uflorida-my.sharepoint.com/:v:/g/personal/spabbathi_ufl_edu/Ean2Ve1wj4xEtgGceMtBZ4sBMSX4zHehqoICCcBVmN8iBQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=0E9E5X](https://uflorida-my.sharepoint.com/:v:/g/personal/spabbathi_ufl_edu/EW5UU8vq8KREoVEEvIeVGNABJ3nnGEQryCOwQZz8kp5Zlg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=8JFDSt))
+- - [Frontend]([https://drive.google.com/file/d/1wLm-qh37Ih8RsFMu-TMAoJNtcbJZStD_/view?usp=sharing](https://tinyurl.com/mrykh238))
 
 
 ## User Stories:
