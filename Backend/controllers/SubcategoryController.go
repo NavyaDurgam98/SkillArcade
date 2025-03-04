@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/services"
 	"net/http"
 	"github.com/gin-gonic/gin"
@@ -8,8 +9,9 @@ import (
 
 // GetSubCategories retrieves subcategories for a specific category
 func GetSubCategories(c *gin.Context) {
+	collection := Data.GetCollection("SkillArcade", "Quizzes")
 	categoryName := c.Param("category")
-	subCategories, err := services.FetchSubCategories(c, categoryName)
+	subCategories, err := services.FetchSubCategories(c, categoryName,collection)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
