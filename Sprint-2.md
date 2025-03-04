@@ -1,7 +1,5 @@
 # Sprint 2 Report
 
-## Visual Demo Links
-## Visual Demo Links
 
 ## Visual Demo Links
 - [DEMO](https://tinyurl.com/mrykh238)
