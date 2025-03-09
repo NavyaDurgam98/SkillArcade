@@ -147,6 +147,27 @@ QuizQuestions Collection
   - The tests structure allows to thoroughly test database interactions , covering success and various failure scenarios, all without needing a real database.
   - Code includes a complete test suite covering all services to validate their functionality and performance. These tests help maintain code quality and prevent regressions.
 
+## TestFetchQuizQuestions
+-  **Success**: Fetches quiz questions successfully.
+-  **not_found**: Handles case where quiz questions are not found.
+-  **database_error**: Handles database failure scenario.
+
+## TestFetchSubCategories
+-  **Success**: Successfully retrieves subcategories.
+-  **not_found**: Handles case where subcategories are not found.
+-  **database_error**: Handles database failure scenario.
+
+## TestFetchQuizTopics
+-  **Success**: Successfully fetches quiz topics.
+-  **not_found**: Handles case where quiz topics are not found.
+-  **database_error**: Handles database failure scenario.
+
+## TestFetchCategories
+-  **Success**: Retrieves categories successfully.
+-  **not_found**: Handles case where categories are not found.
+-  **database_error**: Handles database failure scenario.
+
+
 ### Frontend Development  
 - Implemented **Technology Panels** with the following features:
   - **Dashboard Component** - Displays all the **domains** in Computer Science Engineering.
