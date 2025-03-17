@@ -21,11 +21,11 @@ jobs:
 
         - name: Install frontend dependencies
           run: npm install
-          working-directory: ../../Frontend
+          working-directory: ../Frontend
 
         - name: Run Angular linter
           run: npm run lint
-          working-directory: ../../Frontend
+          working-directory: ../Frontend
 
         # Set up Go for backend
         - name: Set up Go
@@ -35,8 +35,8 @@ jobs:
 
         - name: Install backend dependencies
           run: go mod tidy
-          working-directory: ../../Backend
+          working-directory: ../Backend
 
         - name: Run Go linter
           run: golangci-lint run
-          working-directory: ../../Backend
+          working-directory: ../Backend
