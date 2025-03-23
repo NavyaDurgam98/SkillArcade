@@ -1,20 +1,21 @@
 package services
 
 import (
-	"BACKEND/Data"
+	// "BACKEND/Data"
 	"context"
 	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type CategoryOnly struct {
 	CategoryName string `json:"category" bson:"category"`
 }
 
-func FetchCategories(c context.Context) ([]CategoryOnly, error) {
-	collection := Data.GetCollection("SkillArcade", "Quizzes")
+func FetchCategories(c context.Context,collection *mongo.Collection) ([]CategoryOnly, error) {
+	// collection := Data.GetCollection("SkillArcade", "Quizzes")
 	filter := bson.M{}
 	findOptions := options.Find()
 	findOptions.SetProjection(bson.M{

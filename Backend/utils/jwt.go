@@ -21,11 +21,13 @@ type Claims struct {
 }
 
 func init() {
-	// Load .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
+	if os.Getenv("ENVIRONMENT") != "test" {
+		// Load .env file
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
+	
 
 	// Get the JWT secret key from environment variables
 	secret := os.Getenv("JWT_SECRET")
@@ -35,7 +37,9 @@ func init() {
 
 	// Convert to byte array
 	jwtSecret = []byte(secret)
+	}
 }
+
 
 // GenerateJWT generates a JWT token for a user
 func GenerateJWT(userID, username string) (string, error) {
