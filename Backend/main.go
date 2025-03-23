@@ -36,6 +36,9 @@ func main() {
 	controllers.CategoryRouter(r)
 	controllers.SubCategoryRouter(r)
 	controllers.QuizTopicRouter(r)
+	controllers.QuizQuestionsRouter(r)
+
+	// Protected routes (require JWT authentication)
 	protected := r.Group("/api")
 	protected.Use(middlewares.JWTMiddleware())
 	{
