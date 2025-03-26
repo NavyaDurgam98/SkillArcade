@@ -1,23 +1,26 @@
-
 package models
+
 type CategoryOnly struct {
-    CategoryName string `json:"category" bson:"category"`
+	CategoryName string `json:"category" bson:"category"`
 }
 
 // Category represents the category structure with subcategories and quiz topics.
 type Category struct {
 	CategoryName  string        `json:"category" bson:"category"`
 	SubCategories []SubCategory `json:"sub_categories" bson:"sub_categories"`
+	ImgPath       string        `bson:"imgPath,omitempty" json:"imgPath"`
 }
 
 // SubCategory represents a subcategory in the category, which contains quiz topics.
 type SubCategory struct {
 	SubCategoryName string      `json:"sub_category" bson:"sub_category"`
 	QuizTopics      []QuizTopic `json:"quiz_topics" bson:"quiz_topics"`
+	SubImgPath      string      `bson:"subImgPath,omitempty" json:"subImgPath"`
 }
 
 // QuizTopic represents a quiz topic within a subcategory.
 type QuizTopic struct {
 	QuizTopicID   string `json:"quiz_topic_id" bson:"quiz_topic_id"`
 	QuizTopicName string `json:"quiz_topic_name" bson:"quiz_topic_name"`
+	QuizImgPath   string `bson:"quizImgPath,omitempty" json:"quizImgPath"`
 }

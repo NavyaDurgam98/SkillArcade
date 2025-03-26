@@ -23,6 +23,7 @@ func UserRegistrationService(c context.Context, user *models.UserRegister) (stri
 
 	//create user object to insert in DB
 	userData := bson.M{
+
 		"firstname": user.FirstName,
 		"lastname":  user.LastName,
 		"username":  user.Username,
