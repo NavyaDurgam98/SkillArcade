@@ -13,7 +13,7 @@ type Category struct {
 // SubCategory represents a subcategory in the category, which contains quiz topics.
 type SubCategory struct {
 	SubCategoryName string      `json:"sub_category" bson:"sub_category"`
-	SubImgPath      string      `json:"subImgPath" bson:"subImgPath"` // Added subImgPath field
+	SubImgPath      string      `json:"subImgPath" bson:"subImgPath"` 
 	QuizTopics      []QuizTopic `json:"quiz_topics" bson:"quiz_topics"`
 }
 
