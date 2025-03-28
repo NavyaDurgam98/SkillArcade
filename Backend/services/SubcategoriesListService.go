@@ -8,8 +8,11 @@ import (
 	"strings"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
+
 func FetchSubCategories(c context.Context, categoryName string,collection *mongo.Collection) ([]models.SubCategory, error) {
+
 	// collection := Data.GetCollection("SkillArcade", "Quizzes")
 	categoryName = strings.TrimSpace(categoryName)
 	filter := bson.M{"category": categoryName}

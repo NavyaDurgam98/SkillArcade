@@ -1,0 +1,31 @@
+<div class="user-rank-bar">
+  <h2>Your Rank: {{ currentUserRank }}</h2>
+  <p>You attempted: {{ attemptsMade }} quizzes</p>
+</div>
+
+<!-- Show leaderboard only when data is available -->
+<div *ngIf="leaderboardData.length > 0; else loading">
+  <div class="leaderboard-grid">
+      <table>
+          <thead>
+              <tr>
+                  <th (click)="toggleSort('serialNumber')">Serial Number</th>
+                  <th (click)="toggleSort('userName')">User Name</th>
+                  <th (click)="toggleSort('rank')">Rank</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of leaderboardData; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ user.userName }}</td>
+                  <td>{{ user.rank }}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+
+<!-- Loading template -->
+<ng-template #loading>
+  <p>Loading leaderboard...</p>
+</ng-template>
