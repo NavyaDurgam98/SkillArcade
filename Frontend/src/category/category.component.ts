@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DashboardService } from '../dashboard/dashboard.service';
+import { CategoryService } from './category.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -14,23 +14,17 @@ export class CategoryComponent implements OnInit {
   categoryName: string = ''; // Ensure categoryName exists
   subCategories: any[] = []; // Ensure subCategories is declared
 
-  constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService) {}
 
   ngOnInit() {
-    // Get the category from the URL
     this.categoryName = this.route.snapshot.paramMap.get('category') || '';
-
-    // Fetch categories and filter by the selected category
-    this.dashboardService.getCategories().subscribe(data => {
-      const categoryData = data.find(cat => cat.category === this.categoryName);
-      if (categoryData) {
-        this.subCategories = categoryData.sub_categories;
-        console.log("Subcategories of", this.categoryName, ":", this.subCategories);
-      } else {
-        console.log("Category not found:", this.categoryName);
-      }
+  
+    this.categoryService.getCategories(this.categoryName).subscribe(data => {
+      this.subCategories = data; 
+      console.log("Subcategories of", this.categoryName, ":", this.subCategories);
     });
   }
+  
 
   // Navigate to quiz page
   goToQuizTopic(subCategory: string) {

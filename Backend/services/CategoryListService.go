@@ -10,16 +10,18 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type CategoryOnly struct {
+type CategoryList struct {
 	CategoryName string `json:"category" bson:"category"`
+	ImgPath      string `json:"imgPath" bson:"imgPath"`
 }
 
-func FetchCategories(c context.Context,collection *mongo.Collection) ([]CategoryOnly, error) {
+func FetchCategories(c context.Context,collection *mongo.Collection) ([]CategoryList, error) {
 	// collection := Data.GetCollection("SkillArcade", "Quizzes")
 	filter := bson.M{}
 	findOptions := options.Find()
 	findOptions.SetProjection(bson.M{
 		"category": 1, 
+		"imgPath":  1,
 		"_id":      0, 
 	})
 
@@ -29,7 +31,7 @@ func FetchCategories(c context.Context,collection *mongo.Collection) ([]Category
 	}
 	defer cursor.Close(c)
 
-	var categories []CategoryOnly
+	var categories []CategoryList
 	if err = cursor.All(c, &categories); err != nil {
 		return nil, fmt.Errorf("error decoding categories: %v", err)
 	}

@@ -1,6 +1,6 @@
 <div *ngIf="userProfile; else loading" class="profile-wrapper">
   <img [src]="defaultUserPhoto" alt="User Photo" class="user-icon">
-
+  <div class="username">{{ userProfile.userName }}</div>
   <div class="profile-content">
     <div class="left-section">
       <p><strong>First Name:</strong> {{ userProfile.firstName }}</p>
