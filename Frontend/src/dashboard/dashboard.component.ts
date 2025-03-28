@@ -31,4 +31,12 @@ export class DashboardComponent implements OnInit {
   goToCategory(category: string) {
     this.router.navigate([`/${category}`]);
   }
+  openAbout() {
+    let modal = new bootstrap.Modal(document.getElementById('aboutModal'));
+    modal.show();
+  }
+
+  logout() {
+    this.router.navigate(['/login']); 
+  }
 }
