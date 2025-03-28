@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  private jsonUrl = 'assets/quiz_data.json'; // Path to JSON file
+  private jsonUrl = 'http://localhost:8080/categories'; // Path to JSON file
 
   constructor(private http: HttpClient) {}
 

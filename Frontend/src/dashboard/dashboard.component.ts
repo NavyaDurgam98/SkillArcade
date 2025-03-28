@@ -1,16 +1,16 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashboardService } from './dashboard.service';
 import { CommonModule } from '@angular/common';
 
-declare var bootstrap: any; 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  standalone: true,
-  imports: [CommonModule]
+  standalone: true, 
+  imports: [CommonModule] // Import CommonModule here
 })
 export class DashboardComponent implements OnInit {
   categories: any[] = [];
@@ -19,23 +19,16 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.dashboardService.getCategories().subscribe(data => {
-      this.categories = data.map((category, index) => ({
+      this.categories = data.map(category => ({
         ...category,
-        image: `assets/${index + 1}.jpg`
+        imgPath: category.imgPath 
       }));
+      console.log("Categories with images:", this.categories);
     });
   }
 
+
   goToCategory(category: string) {
     this.router.navigate([`/${category}`]);
-  }
-
-  openAbout() {
-    let modal = new bootstrap.Modal(document.getElementById('aboutModal'));
-    modal.show();
-  }
-
-  logout() {
-    this.router.navigate(['/login']); 
   }
 }
