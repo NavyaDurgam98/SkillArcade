@@ -1,0 +1,23 @@
+<div *ngIf="userProfile; else loading" class="profile-wrapper">
+  <img [src]="defaultUserPhoto" alt="User Photo" class="user-icon">
+
+  <div class="profile-content">
+    <div class="left-section">
+      <p><strong>First Name:</strong> {{ userProfile.firstName }}</p>
+      <p><strong>Last Name:</strong> {{ userProfile.lastName }}</p>
+      <p><strong>Email:</strong> {{ userProfile.email }}</p>
+    </div>
+    
+    <div class="right-section">
+      <a  [routerLink]="'/forgotpassword'" class="reset-password">Reset Password</a>
+      <p><strong>Rank:</strong> {{ userProfile.rank }}</p>
+      <p><strong>Quizzes Taken:</strong> {{ userProfile.quizzesTaken }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading">
+    <p>Loading user profile...</p>
+  </div>
+</ng-template>

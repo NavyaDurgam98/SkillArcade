@@ -1,0 +1,102 @@
+body {
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  max-width: 700px;
+  width: 90%;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+
+.user-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+p {
+  font-size: 1.2rem;
+  margin: 5px 0;
+}
+
+.profile-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.left-section, .right-section {
+  width: 50%;
+}
+.right-section {
+  padding-left: 200px;
+}
+
+
+.left-section p, .right-section p {
+  font-size: 1.2rem;
+  margin: 8px 0;
+}
+
+.reset-password {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: blue;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.reset-password:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
