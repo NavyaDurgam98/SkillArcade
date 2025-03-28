@@ -62,7 +62,7 @@ html, body {
 }
 
 .quiz-sidebar li.active {
-    background: #272844 !important; /* Darker shade */
+    background: #272844 !important;
     font-weight: bold;
     color: white;
 }
@@ -99,33 +99,66 @@ html, body {
     background-color: darkgreen;
 }
 
+/* Progress & Timer Container */
 .quiz-progress-container {
     width: 100%;
-    position: fixed; /* ✅ Ensures it remains at the top */
+    position: fixed;
     top: 0;
     left: 0;
-    background-color: white; /* ✅ Prevents overlap with background */
-    z-index: 100; /* ✅ Ensures it stays above other content */
+    background-color: white;
+    z-index: 100;
     text-align: center;
-    padding: 10px 0; /* ✅ Adds some spacing */
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/* Timer Styling */
+.quiz-timer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+    background: rgba(255, 0, 0, 0.1);
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    position: relative; /* Ensure child positions correctly */
+}
+
+.quiz-timer {
+    font-size: 28px;  /* Increase font size */
+    font-weight: bold;
+    color: rgb(9, 9, 9);
+    background-color: rgb(113, 179, 249); 
+    padding: 15px 20px; /* Increase padding for better visibility */
+    border-radius: 10px; /* Rounded edges */
+    text-align: center;
+    width: auto;
+    min-width: 100px;
+    display: inline-block;
+    position: relative; /* Change from absolute to relative to stay inside .quiz-timer-container */
+}
+
 
 
 /* Progress Bar */
 .quiz-progress {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the progress bar */
+    align-items: center;
     justify-content: center;
     text-align: center;
     width: 100%;
     padding: 20px;
-
 }
 
 .progress-bar {
-    width: 80%; /* Adjust width as needed */
-    max-width: 600px; /* Prevent it from being too wide */
+    width: 80%;
+    max-width: 600px;
     height: 8px;
     background-color: #e0e0e0;
     border-radius: 4px;
@@ -149,24 +182,24 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* Ensure uniform width for all options */
+/* Options */
 .options {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center options */
+    align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-/* Option Button - Fixed Size */
+/* Option Button */
 .option-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%; /* Ensure all buttons take full width */
+    width: 100%;
     min-height: 70px;
-    max-width: 500px; /* Restrict to fixed width */
-    height: 60px; /* Fixed height for all options */
+    max-width: 500px;
+    height: 60px;
     padding: 15px;
     margin: 10px 0;
     background-color: blue;
@@ -177,14 +210,14 @@ html, body {
     cursor: pointer;
     transition: background 0.3s ease-in-out;
     text-align: left;
-    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    box-sizing: border-box;
     white-space: normal;
-    word-wrap: break-word; /* ✅ Ensures words wrap properly */
+    word-wrap: break-word;
     overflow: visible;
     text-overflow: ellipsis;
 }
 
-/* Option Label (A, B, C, D) */
+/* Option Label */
 .option-label {
     font-weight: bold;
     border: 2px solid white;
@@ -194,7 +227,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0; /* Prevents shrinking */
+    flex-shrink: 0;
     margin-right: 15px;
     background-color: white;
     color: blue;
@@ -203,25 +236,25 @@ html, body {
 /* Option Text */
 .option-text {
     flex-grow: 1;
-    white-space: normal;  /* ✅ Allows multi-line text */
-    word-wrap: break-word; /* ✅ Ensures long words wrap properly */
-    overflow: visible; 
+    white-space: normal;
+    word-wrap: break-word;
+    overflow: visible;
     text-overflow: ellipsis;
     text-align: left;
 }
 
-/* Ensuring uniform button widths */
+/* Selected Option */
 .option-btn.selected {
     background-color: darkblue;
 }
 
-/* Ensure Next & Submit Buttons Don't Change */
+/* Next & Submit Buttons */
 .next-btn, .submit-btn {
     margin-top: 20px;
     padding: 12px;
     font-size: 18px;
-    width: 200px; /* Fixed width */
-    height: 50px; /* Fixed height */
+    width: 200px;
+    height: 50px;
     border: none;
     background-color: black;
     color: white;
@@ -250,8 +283,8 @@ html, body {
 .modal-content {
     background: white;
     padding: 30px;
-    width: 500px; /* Increased width */
-    max-width: 90%; /* Responsive limit */
+    width: 500px;
+    max-width: 90%;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
@@ -305,3 +338,32 @@ html, body {
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
 }
+
+.time-warning-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border: 2px solid rgb(1, 53, 96);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1000; /* Ensure it stays on top */
+  }
+  
+  .time-warning-modal p {
+    font-size: 18px;
+    color: rgb(10, 10, 10);
+    font-weight: bold;
+  }
+  
+  .time-warning-modal button {
+    background-color: rgb(73, 154, 242);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  

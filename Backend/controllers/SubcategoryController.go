@@ -3,7 +3,7 @@ package controllers
 import (
 	"BACKEND/Data"
 	"BACKEND/services"
-	"BACKEND/Data"
+	// "BACKEND/Data"
 	"net/http"
 	"github.com/gin-gonic/gin"
 )
