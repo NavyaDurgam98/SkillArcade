@@ -11,15 +11,12 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-
-
 func FetchQuizTopics(c context.Context, categoryName, subCategoryName string,collection *mongo.Collection) ([]models.QuizTopic, error) {
-
 	// collection := Data.GetCollection("SkillArcade", "Quizzes")
 	categoryName = strings.TrimSpace(categoryName) //for removing leading spaces
 	subCategoryName = strings.TrimSpace(subCategoryName)
 	filter := bson.M{
-		"category":                 categoryName,
+		"category":                    categoryName,
 		"sub_categories.sub_category": subCategoryName,
 	}
 	var category models.Category
