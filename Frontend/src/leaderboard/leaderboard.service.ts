@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LeaderboardService {
-  private apiUrl = 'http://localhost:8080/leaderboard'; // Your actual API base URL
+  private apiUrl = 'http://localhost:8080/leaderboard'; // Base URL
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,7 @@ export class LeaderboardService {
     return this.http.get<any[]>(this.apiUrl).pipe(
       catchError(error => {
         console.error('API error:', error);
-        return of([]); // Return an empty array on error
+        return of([]); 
       })
     );
   }
@@ -26,7 +26,7 @@ export class LeaderboardService {
     return this.http.get<any>(`${this.apiUrl}?user_id=${userId}`).pipe(
       catchError(error => {
         console.error('API error:', error);
-        return of({ rank: 0, quizzes_taken: 0 }); // Return a default value on error
+        return of({ rank: 0, quizzes_taken: 0 }); 
       })
     );
   }
