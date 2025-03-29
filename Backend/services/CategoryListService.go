@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
@@ -13,13 +14,13 @@ type CategoryOnly struct {
 	CategoryName string `json:"category" bson:"category"`
 }
 
-func FetchCategories(c context.Context,collection *mongo.Collection) ([]CategoryOnly, error) {
+func FetchCategories(c context.Context, collection *mongo.Collection) ([]CategoryOnly, error) {
 	// collection := Data.GetCollection("SkillArcade", "Quizzes")
 	filter := bson.M{}
 	findOptions := options.Find()
 	findOptions.SetProjection(bson.M{
-		"category": 1, 
-		"_id":      0, 
+		"category": 1,
+		"_id":      0,
 	})
 
 	cursor, err := collection.Find(c, filter, findOptions)

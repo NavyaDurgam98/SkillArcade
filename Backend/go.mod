@@ -8,7 +8,13 @@ require (
 	go.mongodb.org/mongo-driver v1.17.2 // Database
 )
 
-require github.com/sendgrid/rest v2.6.9+incompatible // indirect
+require github.com/stretchr/testify v1.10.0
+
+require (
+	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/sendgrid/rest v2.6.9+incompatible // indirect
+)
 
 require (
 	github.com/bytedance/sonic v1.12.8 // indirect
