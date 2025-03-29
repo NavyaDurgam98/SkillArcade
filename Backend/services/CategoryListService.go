@@ -15,8 +15,10 @@ type CategoryList struct {
 	ImgPath      string `json:"imgPath" bson:"imgPath"`
 }
 
+
 func FetchCategories(c context.Context, collection *mongo.Collection, searchText string) ([]CategoryList, error) {
 	// Create filter based on searchText
+
 	filter := bson.M{}
 	if len(searchText) >= 3 {
 		filter = bson.M{

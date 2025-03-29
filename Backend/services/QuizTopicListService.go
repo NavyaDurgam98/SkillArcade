@@ -13,6 +13,7 @@ import (
 
 func FetchQuizTopics(c context.Context, categoryName, subCategoryName, searchText string, collection *mongo.Collection) ([]models.QuizTopic, error) {
 	categoryName = strings.TrimSpace(categoryName)
+
 	subCategoryName = strings.TrimSpace(subCategoryName)
 	searchText = strings.TrimSpace(searchText)
 
