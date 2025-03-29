@@ -18,14 +18,14 @@ func UserLogin(c *gin.Context) {
 	}
 
 	// Authenticate user and generate JWT
-	token, err := services.UserLoginService(c.Request.Context(), &loginData)
+	token, userID, err := services.UserLoginService(c.Request.Context(), &loginData)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 
 	// Return JWT token in response
-	c.JSON(http.StatusOK, gin.H{"token": token})
+	c.JSON(http.StatusOK, gin.H{"token": token, "user_id": userID})
 
 	//connect to service to validate in db
 	// _, err := services.UserLoginService(c.Request.Context(), &loginData)

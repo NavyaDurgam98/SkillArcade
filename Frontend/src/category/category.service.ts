@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService {
-  private jsonUrl = 'http://localhost:8080/categories'; 
+export class CategoryService {
+  private jsonUrl = 'http://localhost:8080/categories/'; 
 
   constructor(private http: HttpClient) {}
 
-  getCategories(): Observable<any[]> {
-    return this.http.get<any[]>(this.jsonUrl);
+  getCategories(categoryName:string): Observable<any[]> {
+    return this.http.get<any[]>(this.jsonUrl+categoryName);
   }
 }

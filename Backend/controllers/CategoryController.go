@@ -8,11 +8,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
-
 func GetCategories(c *gin.Context) {
 	collection := Data.GetCollection("SkillArcade", "Quizzes")
-	categories, err := services.FetchCategories(c,collection)
+	searchText := c.Query("searchText")
+
+	categories, err := services.FetchCategories(c, collection, searchText)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
