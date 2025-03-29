@@ -11,7 +11,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// SubmitQuizService handles logic to insert/update a user's quiz attempt
 func SubmitQuizService(ctx context.Context, payload *models.QuizSubmitRequest) error {
 	userScoreCollection := Data.GetCollection("SkillArcade", "UserScores")
 
@@ -30,7 +29,7 @@ func SubmitQuizService(ctx context.Context, payload *models.QuizSubmitRequest) e
 	var userScore models.UserScore
 	err = userScoreCollection.FindOne(ctx, bson.M{"user_id": userObjectID}).Decode(&userScore)
 
-	// CASE 1: No document found → Create new user score document
+	//No document found → Create new user score document
 	if err != nil {
 		newUserScore := models.UserScore{
 			UserID: userObjectID,
@@ -53,7 +52,7 @@ func SubmitQuizService(ctx context.Context, payload *models.QuizSubmitRequest) e
 		return nil
 	}
 
-	// CASE 2: Document exists → Update quiz or append new
+	// Document exists → Update quiz or append new
 	found := false
 	totalScore := 0
 
@@ -69,7 +68,6 @@ func SubmitQuizService(ctx context.Context, payload *models.QuizSubmitRequest) e
 			}
 			found = true
 		}
-		// Calculate totalScore regardless
 		totalScore += quiz.Score
 	}
 

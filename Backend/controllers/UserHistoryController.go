@@ -15,7 +15,6 @@ func GetUserHistory(c *gin.Context) {
 		return
 	}
 
-	// Call service function to get user quiz history
 	userHistory, err := services.GetUserHistoryService(c.Request.Context(), userID)
 	if err != nil {
 		if err.Error() == "invalid user ID format" {
@@ -28,7 +27,6 @@ func GetUserHistory(c *gin.Context) {
 		return
 	}
 
-	// Return quiz history as JSON
 	c.JSON(http.StatusOK, userHistory)
 }
 

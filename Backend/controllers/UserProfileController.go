@@ -7,9 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetUserProfile handles the user profile API request
 func GetUserProfile(c *gin.Context) {
-	// Get user_id from query parameters
 	userID := c.Query("user_id")
 	if userID == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User ID is required"})
@@ -29,11 +27,9 @@ func GetUserProfile(c *gin.Context) {
 		return
 	}
 
-	// Return the user profile
 	c.JSON(http.StatusOK, profile)
 }
 
-// UserProfileRouter sets up the routing for the user profile API
 func UserProfileRouter(router *gin.Engine) {
 	router.GET("/userprofile", GetUserProfile)
 }

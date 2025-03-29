@@ -10,9 +10,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// GetUserProfileService fetches user profile details based on user ID
 func GetUserProfileService(ctx context.Context, userID string) (models.UserProfile, error) {
-	// Access MongoDB collection
+
 	userDetailsCollection := Data.GetCollection("SkillArcade", "UserDetails")
 
 	// Convert userID to ObjectID
