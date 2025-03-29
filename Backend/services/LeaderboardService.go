@@ -18,44 +18,40 @@ func GetLeaderboardService(ctx context.Context, userID string) ([]models.Leaderb
 	pipeline := mongo.Pipeline{
 		{{
 			Key: "$lookup", Value: bson.D{
-				{Key: "from", Value: "UserDetails"},   // Collection to join
-				{Key: "localField", Value: "user_id"}, // Field in UserScores
-				{Key: "foreignField", Value: "_id"},   // Field in UserDetails
-				{Key: "as", Value: "user"},            // Alias for the joined data
+				{Key: "from", Value: "UserDetails"},
+				{Key: "localField", Value: "user_id"},
+				{Key: "foreignField", Value: "_id"},
+				{Key: "as", Value: "user"},
 			},
 		}},
-		{{Key: "$unwind", Value: "$user"}}, // Unwind the joined user details
+		{{Key: "$unwind", Value: "$user"}},
 		{{
 			Key: "$project", Value: bson.D{
 				{Key: "_id", Value: "$user._id"},
-				{Key: "username", Value: "$user.username"},                               // Extract username from joined data
-				{Key: "total_score", Value: 1},                                           // Include total_score from UserScores
-				{Key: "quizzes_taken", Value: bson.D{{Key: "$size", Value: "$quizzes"}}}, // Calculate number of quizzes taken
+				{Key: "username", Value: "$user.username"},
+				{Key: "total_score", Value: 1},
+				{Key: "quizzes_taken", Value: bson.D{{Key: "$size", Value: "$quizzes"}}},
 			},
 		}},
 		{{Key: "$sort", Value: bson.D{{Key: "total_score", Value: -1}}}}, // Sort by total score descending
 	}
 
-	// Execute aggregation
 	cursor, err := userScoreCollection.Aggregate(ctx, pipeline)
 	if err != nil {
 		return nil, nil, errors.New("failed to aggregate leaderboard")
 	}
 	defer cursor.Close(ctx)
 
-	// Conditional logic based on userID presence
 	if userID == "" {
-		// Return top 10 users
 		top10, err := getTop10Users(ctx, cursor)
 		return top10, nil, err
 	} else {
-		// Return specific user rank
 		userRank, err := getUserRank(ctx, cursor, userID)
 		return nil, &userRank, err
 	}
 }
 
-// Helper to get top 10 users
+// Helper function to get top 10 users
 func getTop10Users(ctx context.Context, cursor *mongo.Cursor) ([]models.LeaderboardEntry, error) {
 	var results []models.LeaderboardEntry
 	rank := 1
@@ -87,7 +83,7 @@ func getTop10Users(ctx context.Context, cursor *mongo.Cursor) ([]models.Leaderbo
 	return results, nil
 }
 
-// Helper to get a specific user's rank
+// Helper function  to get a specific user's rank
 func getUserRank(ctx context.Context, cursor *mongo.Cursor, userID string) (models.LeaderboardEntry, error) {
 	rank := 1
 
