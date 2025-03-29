@@ -10,8 +10,7 @@ import { RouterModule } from '@angular/router';
   standalone : true,
   imports : [ CommonModule, RouterModule]
 })
-//export class LeaderboardComponent implements OnInit {
-  export class LeaderboardComponent {
+export class LeaderboardComponent implements OnInit {
 
   currentUserRank: number = 0;
   attemptsMade: number = 0;
@@ -19,33 +18,51 @@ import { RouterModule } from '@angular/router';
   sortColumn: string = 'rank';
   sortDirection: boolean = true;
   isLoading: boolean = true;
+  currentUser: any;
 
   constructor(private leaderboardService: LeaderboardService) {}
 
-  // ngOnInit(): void {
-  //   this.loadLeaderboard();
-  // }
+  ngOnInit(): void {
+    this.loadLeaderboard();
+  }
 
   loadLeaderboard(): void {
-    const userId = 123; // Replace with actual logged-in user ID
-    this.leaderboardService.getRankings(userId).subscribe({
+    const userId = '679d5a260264697ca72d7c4a'; // Replace with the actual logged-in user ID
+    this.isLoading = true;  // Set loading state to true before fetching data
+
+    // Fetch full leaderboard first
+    this.leaderboardService.getLeaderboard().subscribe({
       next: (data) => {
-        console.log("API Response:", data);
-        this.currentUserRank = data.currentRank ?? 0;
-        this.attemptsMade = data.attempts ?? 0;
-        this.leaderboardData = data.rankings ?? [];
+        console.log("Leaderboard API Response:", data);
+        this.leaderboardData = data; // Store leaderboard data
+
+        // Fetch current user's data
+        this.leaderboardService.getUserRank(userId).subscribe({
+          next: (userData) => {
+            console.log("User Data:", userData);
+            this.currentUserRank = userData.rank ?? 0;
+            this.attemptsMade = userData.quizzes_taken ?? 0;
+            this.currentUser = userData; // Store current user's data
+          },
+          error: (error) => {
+            console.error("Error fetching user rank:", error);
+            this.currentUserRank = 0;
+            this.attemptsMade = 0;
+          },
+          complete: () => {
+            this.isLoading = false;
+            console.log("User data fetched successfully.");
+          }
+        });
       },
       error: (error) => {
         console.error("Error fetching leaderboard data:", error);
-        this.currentUserRank = 0;
-        this.attemptsMade = 0;
-        this.leaderboardData = [];
+        this.isLoading = false;
       },
       complete: () => {
         console.log("Leaderboard data fetched successfully.");
       }
     });
-    
   }
 
   toggleSort(column: string): void {
