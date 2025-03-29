@@ -40,6 +40,7 @@ func main() {
 	controllers.SubmitQuizRouter(r)
 	controllers.LeaderboardRouter(r)
 	controllers.UserHistoryRouter(r)
+	controllers.UserProfileRouter(r)
 
 	// Protected routes (require JWT authentication)
 	protected := r.Group("/api")
