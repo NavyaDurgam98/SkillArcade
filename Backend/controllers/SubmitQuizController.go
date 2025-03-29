@@ -19,7 +19,6 @@ func SubmitQuiz(c *gin.Context) {
 		return
 	}
 
-	// Call the service layer to handle the business logic
 	err := services.SubmitQuizService(c.Request.Context(), &requestData)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -28,7 +27,6 @@ func SubmitQuiz(c *gin.Context) {
 		return
 	}
 
-	// Return success response
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Quiz submitted successfully",
 	})
