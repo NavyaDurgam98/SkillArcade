@@ -17,9 +17,11 @@ export class NavbarComponent {
     let modal = new bootstrap.Modal(document.getElementById('aboutModal'));
     modal.show();
   }
-
+  
   // To handle logout and navigate to the login page
   logout() {
     this.router.navigate(['/login']);
   }
+
+  
 }

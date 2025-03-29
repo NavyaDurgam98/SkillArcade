@@ -7,15 +7,26 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LeaderboardService {
-  private apiUrl = 'https://example.com/api/leaderboard'; // Replace with actual API URL
+  private apiUrl = 'http://localhost:8080/leaderboard'; // Your actual API base URL
 
   constructor(private http: HttpClient) {}
 
-  getRankings(userId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}?userId=${userId}`).pipe(
+  // Fetch the leaderboard data
+  getLeaderboard(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl).pipe(
       catchError(error => {
         console.error('API error:', error);
-        return of({ currentRank: 0, attempts: 0, rankings: [] });
+        return of([]); // Return an empty array on error
+      })
+    );
+  }
+
+  // Fetch the current user's rank data
+  getUserRank(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}?user_id=${userId}`).pipe(
+      catchError(error => {
+        console.error('API error:', error);
+        return of({ rank: 0, quizzes_taken: 0 }); // Return a default value on error
       })
     );
   }
