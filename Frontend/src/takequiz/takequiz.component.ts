@@ -19,15 +19,15 @@ interface Topic {
   selector: 'app-quiz',
   templateUrl: './takequiz.component.html',
   styleUrls: ['./takequiz.component.css'],
-  imports: [CommonModule,RouterModule]
+  imports: [CommonModule, RouterModule]
 })
-export class  TakeQuizComponent implements OnInit{
+export class TakeQuizComponent implements OnInit {
 
   category: string = '';
   subcategory: string = '';
   quizTopic: string = '';
   quizTopicsList: any[] = [];
-  quizData: Topic | null = null; 
+  quizData: Topic | null = null;
 
   currentQuestionIndex = 0;
   selectedAnswer: number | null = null;
@@ -36,10 +36,11 @@ export class  TakeQuizComponent implements OnInit{
   quizStarted = false;
   loading = false;
 
+  remainingTime: number = 100; // Example starting time: 1 minutes (300 seconds)
+  showWarning: boolean = false; 
 
-  constructor(private route: ActivatedRoute,private router: Router,private takequizService: TakequizService)
-  {}
-  
+  constructor(private route: ActivatedRoute, private router: Router, private takequizService: TakequizService) {}
+
   ngOnInit(): void {
     // Retrieve route parameters
     this.route.params.subscribe(params => {
@@ -48,26 +49,29 @@ export class  TakeQuizComponent implements OnInit{
       this.quizTopic = params['quizTopic'];
       console.log(this.quizTopic);
 
-      // Fetch quiz data from JSON file
+      
       this.loadQuizData();
+
+      
+      this.startTimer();
     });
   }
 
   loadQuizData() {
     this.loading = true;
-  
+
     this.takequizService.getQuizData(this.quizTopic).subscribe(
       data => {
         console.log("Fetched API Data:", data);
-  
+
         if (!data) {
           console.error("No quiz data found for topic:", this.quizTopic);
           this.loading = false;
           return;
         }
-  
-        // Store quiz data from API response
-        this.quizData = data; 
+
+        
+        this.quizData = data;
         this.loading = false;
       },
       error => {
@@ -127,8 +131,8 @@ export class  TakeQuizComponent implements OnInit{
 
   closeModal(): void {
     this.showModal = false;
-    this.quizTopic = '';  // Reset selected quiz topic
-    this.quizData = null;  // Clear quiz data
+    this.quizTopic = '';  
+    this.quizData = null;  
     this.quizStarted = false;
     this.selectedAnswer = null;
     this.currentQuestionIndex = 0;
@@ -143,7 +147,7 @@ export class  TakeQuizComponent implements OnInit{
     this.score = 0;
     this.selectedAnswer = null;
     this.showModal = false;
-}
+  }
 
   isLastQuestion(): boolean {
     return this.quizData ? this.currentQuestionIndex === this.quizData.questions.length - 1 : false;
@@ -156,5 +160,36 @@ export class  TakeQuizComponent implements OnInit{
 
   getOptionLabel(index: number): string {
     return ['A', 'B', 'C', 'D'][index] || '';
+  }
+
+  // New method to start the timer
+  showTimeWarning: boolean = false;  
+
+startTimer() {
+  const timer = setInterval(() => {
+    if (this.remainingTime > 0) {
+      this.remainingTime--;
+
+      // Show warning when time reaches 1 minute
+      if (this.remainingTime === 60) {
+        this.showTimeWarning = true; 
+      }
+
+      
+      this.showWarning = this.remainingTime <= 30; 
+    } else {
+      clearInterval(timer);  
+      this.submitQuiz(); // Auto-submit the quiz
+    }
+  }, 1000); 
+}
+
+  
+
+  // New method to format the remaining time
+  getFormattedTime(): string {
+    let minutes = Math.floor(this.remainingTime / 60);
+    let seconds = this.remainingTime % 60;
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
   }
 }

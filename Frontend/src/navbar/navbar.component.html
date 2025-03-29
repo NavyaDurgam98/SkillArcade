@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">SkillArcade</a>
+    
+    <div class="d-flex align-items-center">
+      <button class="btn btn-outline-primary me-3" (click)="openAbout()">About</button>
+      
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" style="background: transparent; border: none;">
+          <img src="assets/profile.png" alt="Profile" style="width: 30px; height: 30px; border-radius: 50%;">
+        </button>
+        
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">User Profile</a></li>
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
