@@ -23,5 +23,11 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
+  onSearch(event: any) {
+  const searchText = event.target.value;
+    if (searchText.length >= 3 || searchText.length === 0) {
+    this.activeComponentService.setSearchText(searchText);
+  }
+}
   
 }
