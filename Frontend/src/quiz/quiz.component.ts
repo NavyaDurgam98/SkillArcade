@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { QuizService } from './quiz.service';
+import { ActiveComponentService } from '../app/active.component.service';
+import { Subscription } from 'rxjs';
 
-// TypeScript Interface
 interface QuizTopic {
   quiz_topic_id: string;
   quiz_topic_name: string;
@@ -17,22 +18,37 @@ interface QuizTopic {
   styleUrls: ['./quiz.component.css'],
   imports: [CommonModule]
 })
-export class QuizComponent implements OnInit {
+export class QuizComponent implements OnInit, OnDestroy {
   categoryName: string = '';
   subCategoryName: string = '';
   quizTopics: QuizTopic[] = [];
+  searchText: string = ''; 
+  searchSubscription: Subscription | null = null; 
 
-  constructor(private route: ActivatedRoute, private router: Router, private quizService: QuizService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private quizService: QuizService,
+    private activeComponentService: ActiveComponentService
+  ) {}
 
   ngOnInit() {
     this.categoryName = this.route.snapshot.paramMap.get('category') || '';
     this.subCategoryName = this.route.snapshot.paramMap.get('sub_category') || '';
 
-    this.quizService.getQuizTopics(this.categoryName, this.subCategoryName).subscribe({
+    this.searchSubscription = this.activeComponentService.getSearchText().subscribe((searchText: string) => {
+      this.searchText = searchText; 
+      this.loadQuizTopics(); 
+    });
+
+    this.loadQuizTopics();
+  }
+
+  loadQuizTopics() {
+    this.quizService.getQuizTopics(this.categoryName, this.subCategoryName, this.searchText).subscribe({
       next: (response: any) => {
         if (response && response.quiz_topics) {
           this.quizTopics = response.quiz_topics;
-          console.log(`Quiz topics for ${this.subCategoryName}:`, this.quizTopics);
         } else {
           console.warn(`No quiz topics found for ${this.subCategoryName}`);
         }
@@ -47,7 +63,13 @@ export class QuizComponent implements OnInit {
   }
 
   takeQuiz(quizTopicId: string) {
-    console.log(`Navigating to: /${this.categoryName}/${this.subCategoryName}/${quizTopicId}/takequiz`);
     this.router.navigate([`/${this.categoryName}/${this.subCategoryName}/${quizTopicId}/takequiz`]);
   }
+
+  ngOnDestroy() {
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
+    }
+  }
 }
+
