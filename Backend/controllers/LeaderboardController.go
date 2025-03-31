@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/services"
 	"net/http"
 
@@ -10,8 +11,13 @@ import (
 func GetLeaderboard(c *gin.Context) {
 	userID := c.Query("user_id")
 
-	toprankers, userRank, err := services.GetLeaderboardService(c.Request.Context(), userID)
+	collection := Data.GetCollection("SkillArcade", "UserScores")
+	toprankers, userRank, err := services.GetLeaderboardService(c.Request.Context(), collection, userID)
 	if err != nil {
+		if err.Error() == "user not found" {
+			c.JSON(http.StatusOK, gin.H{"message": "User not found"})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}

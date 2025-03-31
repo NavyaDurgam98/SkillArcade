@@ -1,7 +1,6 @@
 package services_test
 
 import (
-	"BACKEND/models"
 	"BACKEND/services"
 	"context"
 	"testing"
@@ -13,12 +12,14 @@ import (
 
 func TestFetchSubCategories(t *testing.T) {
 	mt := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
+
 	mt.Run("success", func(mt *mtest.T) {
 		mockCategory := bson.D{
 			{Key: "category", Value: "Computer Science"},
 			{Key: "sub_categories", Value: bson.A{
 				bson.D{
 					{Key: "sub_category", Value: "Programming Languages"},
+					{Key: "sub_img_path", Value: ""},
 					{Key: "quiz_topics", Value: bson.A{
 						bson.D{{Key: "quiz_topic_id", Value: "1"}, {Key: "quiz_topic_name", Value: "C++"}},
 						bson.D{{Key: "quiz_topic_id", Value: "2"}, {Key: "quiz_topic_name", Value: "Java"}},
@@ -26,6 +27,7 @@ func TestFetchSubCategories(t *testing.T) {
 				},
 				bson.D{
 					{Key: "sub_category", Value: "Data Structures"},
+					{Key: "sub_img_path", Value: ""},
 					{Key: "quiz_topics", Value: bson.A{
 						bson.D{{Key: "quiz_topic_id", Value: "3"}, {Key: "quiz_topic_name", Value: "Arrays"}},
 						bson.D{{Key: "quiz_topic_id", Value: "4"}, {Key: "quiz_topic_name", Value: "Graphs"}},
@@ -34,22 +36,18 @@ func TestFetchSubCategories(t *testing.T) {
 			}},
 		}
 		mt.AddMockResponses(mtest.CreateCursorResponse(1, "dbname.collection", mtest.FirstBatch, mockCategory))
-		expectedSubCategories := []models.SubCategory{
+
+		expectedSubCategories := []map[string]string{
 			{
-				SubCategoryName: "Programming Languages",
-				QuizTopics: []models.QuizTopic{
-					{QuizTopicID: "1", QuizTopicName: "C++"},
-					{QuizTopicID: "2", QuizTopicName: "Java"},
-				},
+				"subCategory": "Programming Languages",
+				"subImgPath":  "",
 			},
 			{
-				SubCategoryName: "Data Structures",
-				QuizTopics: []models.QuizTopic{
-					{QuizTopicID: "3", QuizTopicName: "Arrays"},
-					{QuizTopicID: "4", QuizTopicName: "Graphs"},
-				},
+				"subCategory": "Data Structures",
+				"subImgPath":  "",
 			},
 		}
+
 		result, err := services.FetchSubCategories(context.Background(), "Computer Science", mt.Coll)
 		assert.NoError(t, err)
 		assert.Equal(t, expectedSubCategories, result)

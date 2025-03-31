@@ -1,7 +1,6 @@
 package services
 
 import (
-	"BACKEND/Data"
 	"BACKEND/models"
 	"context"
 	"errors"
@@ -11,9 +10,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func GetLeaderboardService(ctx context.Context, userID string) ([]models.LeaderboardEntry, *models.LeaderboardEntry, error) {
-	userScoreCollection := Data.GetCollection("SkillArcade", "UserScores")
+func GetLeaderboardService(ctx context.Context, collection *mongo.Collection, userID string) ([]models.LeaderboardEntry, *models.LeaderboardEntry, error) {
+	userScoreCollection := collection
 
+	if userID != "" {
+		_, err := primitive.ObjectIDFromHex(userID)
+		if err != nil {
+			return nil, nil, errors.New("invalid user ID format")
+		}
+	}
 	// Aggregation pipeline to sort users by total_score and join with UserDetails
 	pipeline := mongo.Pipeline{
 		{{

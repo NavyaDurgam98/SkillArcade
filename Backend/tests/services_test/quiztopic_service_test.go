@@ -1,13 +1,14 @@
 package services_test
 
 import (
-	"context"
-	"testing"
 	"BACKEND/models"
 	"BACKEND/services"
+	"context"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/integration/mtest"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestFetchQuizTopics(t *testing.T) {

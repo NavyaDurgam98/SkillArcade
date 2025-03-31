@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/services"
 	"net/http"
 
@@ -15,7 +16,8 @@ func GetUserHistory(c *gin.Context) {
 		return
 	}
 
-	userHistory, err := services.GetUserHistoryService(c.Request.Context(), userID)
+	collection := Data.GetCollection("SkillArcade", "UserScores")
+	userHistory, err := services.GetUserHistoryService(c.Request.Context(), collection, userID)
 	if err != nil {
 		if err.Error() == "invalid user ID format" {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID format"})

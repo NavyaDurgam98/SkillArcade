@@ -1,42 +1,41 @@
 package services_test
 
 import (
+	"BACKEND/services"
 	"context"
 	"testing"
-	"BACKEND/services" 
+
+	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo/integration/mtest"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestFetchCategories(t *testing.T) {
 	mt := mtest.New(t, mtest.NewOptions().ClientType(mtest.Mock))
-	
 
-	expectedCategories := []services.CategoryOnly{
+	expectedCategories := []services.CategoryList{
 		{CategoryName: "Math"},
 		{CategoryName: "Science"},
 	}
 
 	mt.Run("success", func(mt *mtest.T) {
 		mt.AddMockResponses(
-			mtest.CreateCursorResponse(1, "dbname.categories", mtest.FirstBatch, 
+			mtest.CreateCursorResponse(1, "dbname.categories", mtest.FirstBatch,
 				bson.D{{Key: "category", Value: "Math"}},
 				bson.D{{Key: "category", Value: "Science"}},
 			),
 			mtest.CreateCursorResponse(0, "dbname.categories", mtest.NextBatch),
 		)
-	
+
 		collection := mt.Coll
 		result, err := services.FetchCategories(context.Background(), collection)
-	
+
 		t.Logf("Result: %+v", result)
 		t.Logf("Error: %v", err)
-	
+
 		assert.NoError(mt, err)
 		assert.Equal(mt, expectedCategories, result)
 	})
-	
 
 	mt.Run("no_categories", func(mt *mtest.T) {
 		// Simulate an empty collection (no results)

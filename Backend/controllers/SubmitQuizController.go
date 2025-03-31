@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/models"
 	"BACKEND/services"
 	"net/http"
@@ -19,7 +20,8 @@ func SubmitQuiz(c *gin.Context) {
 		return
 	}
 
-	err := services.SubmitQuizService(c.Request.Context(), &requestData)
+	collection := Data.GetCollection("SkillArcade", "UserScores")
+	err := services.SubmitQuizService(c.Request.Context(), collection, &requestData)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),

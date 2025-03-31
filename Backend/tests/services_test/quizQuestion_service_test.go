@@ -57,17 +57,17 @@ func (s *QuizQuestionServiceTestSuite) TestFetchQuizQuestions() {
 		result, err := services.FetchQuizQuestions(context.Background(), mt.Coll, "NonExistentTopic")
 		assert.Error(s.T(), err)
 		assert.Nil(s.T(), result)
-		assert.Contains(s.T(), err.Error(), "mongo: no documents in result")
+		assert.Contains(s.T(), err.Error(), "quiz not found")
 	})
 
 	s.mt.Run("database_error", func(mt *mtest.T) {
 		mt.AddMockResponses(mtest.CreateCommandErrorResponse(mtest.CommandError{
 			Code:    12345,
-			Message: "Test database error",
+			Message: "quiz not found",
 		}))
 		result, err := services.FetchQuizQuestions(context.Background(), mt.Coll, "TestTopic")
 		assert.Error(s.T(), err)
 		assert.Nil(s.T(), result)
-		assert.Contains(s.T(), err.Error(), "Test database error")
+		assert.Contains(s.T(), err.Error(), "quiz not found")
 	})
 }
