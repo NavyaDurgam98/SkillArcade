@@ -65,9 +65,10 @@ export class LoginComponent {
       if (this.loginForm.valid) {
         const { username, password } = this.loginForm.value;
         const payload = { username: username, password: password }; 
-        this.http.post<{ token: string }>('http://localhost:8080/signin', payload).subscribe({
+        this.http.post<{ token: string, user_id: string }>('http://localhost:8080/signin', payload).subscribe({
           next: (response) => {
             localStorage.setItem('authToken', response.token); 
+            localStorage.setItem('userId', response.user_id); 
             this.router.navigate(['/dashboard']); 
           },
           error: () => {

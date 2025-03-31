@@ -28,8 +28,9 @@ func GetQuizTopics(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to decode subcategory"})
 		return
 	}
+	searchText := c.Query("searchText")
 
-	quizTopics, err := services.FetchQuizTopics(c, decodedCategoryName, decodedSubCategoryName, collection)
+	quizTopics, err := services.FetchQuizTopics(c, decodedCategoryName, decodedSubCategoryName, searchText, collection)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

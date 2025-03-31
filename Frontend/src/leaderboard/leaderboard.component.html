@@ -4,28 +4,35 @@
 </div>
 
 <!-- Show leaderboard only when data is available -->
-<div *ngIf="leaderboardData.length > 0; else loading">
+<div *ngIf="!isLoading && leaderboardData.length > 0">
   <div class="leaderboard-grid">
-      <table>
-          <thead>
-              <tr>
-                  <th (click)="toggleSort('serialNumber')">Serial Number</th>
-                  <th (click)="toggleSort('userName')">User Name</th>
-                  <th (click)="toggleSort('rank')">Rank</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let user of leaderboardData; let i = index">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ user.userName }}</td>
-                  <td>{{ user.rank }}</td>
-              </tr>
-          </tbody>
-      </table>
+    <table>
+      <thead>
+        <tr>
+          <th (click)="toggleSort('rank')">Rank</th>
+          <th (click)="toggleSort('username')">User Name</th>
+          <th (click)="toggleSort('total_score')">Total Score</th>
+          <th (click)="toggleSort('quizzes_taken')">Quizzes Taken</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of leaderboardData; let i = index">
+          <td>{{ user.rank }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.total_score }}</td>
+          <td>{{ user.quizzes_taken }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<!-- Loading template -->
+<!-- Show loading message while data is being fetched -->
 <ng-template #loading>
   <p>Loading leaderboard...</p>
 </ng-template>
+
+<!-- Error handling -->
+<div *ngIf="leaderboardData.length === 0 && !isLoading">
+  <p>Failed to load leaderboard data. Please try again later.</p>
+</div>
