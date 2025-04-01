@@ -184,12 +184,9 @@ GET /userprofile?user_id=679d5a260264697ca72d7c4a
 
 ### Backend Testing ([List of BackEnd Unit Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/86))
 
-- Unit tests were added for Category, Subcategory, and Quiz Topic services to validate the new `searchText` functionality, covering both filtered and unfiltered API behavior.
+- Implemented unit tests using Testify for assertions and MTest for mocking database interactions, ensuring robust and reliable testing.
 
-- Test cases handle various scenarios including successful fetches, no matches, short search inputs, and simulated MongoDB errors using `mtest`.
-
-- The tests ensure reliable and robust search logic by verifying case-insensitive filtering, minimum character validation, and proper fallback behavior when data is missing or invalid.
-
+- Wrote unit tests for Search API, User Profile API, Leaderboard API, User History API, and Submit Quiz API, covering success scenarios, error handling, and edge cases.
 
 
 ### Frontend Development
