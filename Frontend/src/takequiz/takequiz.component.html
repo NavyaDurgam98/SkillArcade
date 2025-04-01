@@ -15,6 +15,34 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Right Panel: Quiz Form -->
 <div class="quiz-content" *ngIf="!loading">
     <div *ngIf="quizTopic && quizData && currentQuestionIndex < quizData.questions.length; else welcomeMessage">
@@ -52,6 +80,7 @@
             <span class="option-label">{{ getOptionLabel(i) }}</span>
             <span class="option-text">{{ option.value }}</span>
           </button>
+
         </div>
   
         <!-- Navigation Buttons -->
@@ -84,4 +113,3 @@
       </div>
     </div>
   </div>
-  
