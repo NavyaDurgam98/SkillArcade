@@ -1,18 +1,18 @@
 package services
 
 import (
-	"BACKEND/Data"
 	"BACKEND/models"
 	"context"
 	"errors"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func GetUserProfileService(ctx context.Context, userID string) (models.UserProfile, error) {
+func GetUserProfileService(ctx context.Context, collection *mongo.Collection, userID string) (models.UserProfile, error) {
 
-	userDetailsCollection := Data.GetCollection("SkillArcade", "UserDetails")
+	userDetailsCollection := collection
 
 	// Convert userID to ObjectID
 	userObjectID, err := primitive.ObjectIDFromHex(userID)

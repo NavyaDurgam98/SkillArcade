@@ -1,7 +1,6 @@
 package services
 
 import (
-	"BACKEND/Data"
 	"BACKEND/models"
 	"context"
 	"errors"
@@ -9,10 +8,11 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func SubmitQuizService(ctx context.Context, payload *models.QuizSubmitRequest) error {
-	userScoreCollection := Data.GetCollection("SkillArcade", "UserScores")
+func SubmitQuizService(ctx context.Context, collection *mongo.Collection, payload *models.QuizSubmitRequest) error {
+	userScoreCollection := collection
 
 	// Convert user_id and quiz_topic_id to ObjectID
 	userObjectID, err := primitive.ObjectIDFromHex(payload.UserID)
