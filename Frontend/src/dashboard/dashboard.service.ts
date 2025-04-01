@@ -1,16 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+// Define the Category interface
+interface Category {
+  category_id: string;
+  category_name: string;
+  imgPath: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
-  private jsonUrl = 'http://localhost:8080/categories'; 
+  private url = 'http://localhost:8080/categories'; 
 
   constructor(private http: HttpClient) {}
 
-  getCategories(): Observable<any[]> {
-    return this.http.get<any[]>(this.jsonUrl);
+  getCategories(searchText: string = ''): Observable<Category[]> {
+    let params = new HttpParams();
+
+    if (searchText) {
+      params = params.set('searchText', searchText);
+    }
+
+    return this.http.get<Category[]>(this.url, { params });
   }
 }
