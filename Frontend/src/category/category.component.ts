@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DashboardService } from '../dashboard/dashboard.service';
+import { CategoryService } from './category.service';
 import { CommonModule } from '@angular/common';
+import { ActiveComponentService } from '../app/active.component.service'
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category',
@@ -10,44 +12,45 @@ import { CommonModule } from '@angular/common';
   standalone: true, 
   imports: [CommonModule] 
 })
-export class CategoryComponent implements OnInit {
-  categoryName: string = ''; // Ensure categoryName exists
-  subCategories: any[] = []; // Ensure subCategories is declared
-
-  constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService) {}
+export class CategoryComponent implements OnInit,OnDestroy {
+  categoryName: string = ''; 
+  subCategories: any[] = []; 
+  searchText: string = ''; 
+  searchSubscription: Subscription | null = null; 
+  constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService,private activeComponentService:ActiveComponentService) {}
 
   ngOnInit() {
-    // Get the category from the URL
     this.categoryName = this.route.snapshot.paramMap.get('category') || '';
 
-    // Fetch categories and filter by the selected category
-    this.dashboardService.getCategories().subscribe(data => {
-      const categoryData = data.find(cat => cat.category === this.categoryName);
-      if (categoryData) {
-        this.subCategories = categoryData.sub_categories;
-        console.log("Subcategories of", this.categoryName, ":", this.subCategories);
-      } else {
-        console.log("Category not found:", this.categoryName);
-      }
+    this.searchSubscription = this.activeComponentService.getSearchText().subscribe(searchText => {
+      this.searchText = searchText;
+      this.loadCategories();  
     });
-  }
 
-  // Navigate to quiz page
+    this.loadCategories();
+  }
+  
+  ngOnDestroy() {
+    if (this.searchSubscription) {
+      this.searchSubscription.unsubscribe();
+    }
+  }
+  loadCategories() {
+    if (this.searchText.trim()) {
+      this.categoryService.searchCategories(this.categoryName, this.searchText).subscribe(data => {
+        this.subCategories = data;
+        console.log("Filtered subcategories of", this.categoryName, ":", this.subCategories);
+      });
+    } else {
+      this.categoryService.getCategories(this.categoryName).subscribe(data => {
+        this.subCategories = data;
+        console.log("All subcategories of", this.categoryName, ":", this.subCategories);
+      });
+    }
+  }
   goToQuizTopic(subCategory: string) {
     console.log(`Navigating to: /${this.categoryName}/${subCategory}`);
     this.router.navigate([`/${this.categoryName}/${subCategory}`]); 
   }
   
 }
-
-
-//   technologies = [
-//     { name: 'Angular', description: 'A powerful frontend framework by Google.', image:'/assets/angular.png' },
-//     { name: 'React', description: 'A library for building user interfaces by Facebook.', image: 'assets/react.jpg' },
-//     { name: 'Vue.js', description: 'A progressive JavaScript framework.', image: 'assets/vue.jpg' },
-//     { name: 'Node.js', description: 'A runtime for executing JavaScript on the server.', image: 'assets/nodejs.png' },
-//     { name: 'Python', description: 'A versatile programming language.', image: 'assets/python.jpg' },
-//     { name: 'Java', description: 'A widely-used language for building web applications.', image: 'assets/java.png' },
-//     { name: 'C++', description: 'A powerful language for system development.', image: 'assets/cpp.jpg' },
-//     { name: 'SQL', description: 'A language for managing relational databases.', image: 'assets/sql.jpg' }
-//   ];

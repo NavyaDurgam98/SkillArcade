@@ -1,0 +1,235 @@
+
+.profile-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.profile-avatar {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.avatar-border {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ff9a9e, #fbc2eb, #a6c1ee);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  z-index: 1;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  position: relative;
+  z-index: 2;
+}
+
+.profile-title {
+  flex-grow: 1;
+}
+
+.username {
+  font-size: 2rem;
+  margin: 0;
+  color: #2d3436;
+  background: linear-gradient(45deg, #6c5ce7, #fd79a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.user-badge {
+  display: inline-block;
+  background: linear-gradient(45deg, #6c5ce7, #00cec9);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.action-button {
+  background: linear-gradient(45deg, #6c5ce7, #00cec9);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.profile-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.card-icon {
+  font-size: 1.5rem;
+  color: #6c5ce7;
+}
+
+.personal-card .card-icon {
+  color: #fd79a8;
+}
+
+.stats-card .card-icon {
+  color: #00cec9;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #2d3436;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  color: #636e72;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: #2d3436;
+  font-weight: 500;
+  padding: 0.5rem;
+  background: #f5f6fa;
+  border-radius: 8px;
+}
+
+.email-value {
+  word-break: break-all;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rank-circle {
+  background: linear-gradient(45deg, #f6e58d, #ffbe76);
+  color: #d35400;
+}
+
+.quiz-circle {
+  background: linear-gradient(45deg, #badc58, #6ab04c);
+  color: #2e6e31;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #636e72;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Loading animation and other existing styles remain the same */
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-button {
+    margin-top: 1rem;
+  }
+}

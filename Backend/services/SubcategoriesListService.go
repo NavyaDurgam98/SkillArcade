@@ -11,10 +11,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func FetchSubCategories(c context.Context, categoryName string,collection *mongo.Collection) ([]models.SubCategory, error) {
-
-	// collection := Data.GetCollection("SkillArcade", "Quizzes")
+func FetchSubCategories(c context.Context, categoryName, searchText string, collection *mongo.Collection) ([]map[string]string, error) {
 	categoryName = strings.TrimSpace(categoryName)
+	searchText = strings.TrimSpace(searchText)
+
 	filter := bson.M{"category": categoryName}
 
 	var category models.Category
@@ -22,5 +22,20 @@ func FetchSubCategories(c context.Context, categoryName string,collection *mongo
 	if err != nil {
 		return nil, fmt.Errorf("error finding category: %v", err)
 	}
-	return category.SubCategories, nil
+
+	var result []map[string]string
+	for _, subCategory := range category.SubCategories {
+		if len(searchText) >= 3 {
+			// case-insensitive contains match
+			if !strings.Contains(strings.ToLower(subCategory.SubCategoryName), strings.ToLower(searchText)) {
+				continue
+			}
+		}
+		result = append(result, map[string]string{
+			"subCategory": subCategory.SubCategoryName,
+			"subImgPath":  subCategory.SubImgPath,
+		})
+	}
+
+	return result, nil
 }

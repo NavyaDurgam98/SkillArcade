@@ -1,8 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TakequizService } from './takequiz.service';
 import { RouterModule } from '@angular/router';
+
 
 interface Question {
   question: string;
@@ -22,7 +24,7 @@ interface Topic {
   imports: [CommonModule, RouterModule]
 })
 export class TakeQuizComponent implements OnInit {
-
+  quiz_topic_id :string |null= ''; 
   category: string = '';
   subcategory: string = '';
   quizTopic: string = '';
@@ -42,19 +44,21 @@ export class TakeQuizComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router, private takequizService: TakequizService) {}
 
   ngOnInit(): void {
+    
+    this.quiz_topic_id= sessionStorage.getItem('currentQuizId');
     // Retrieve route parameters
     this.route.params.subscribe(params => {
       this.category = params['category'];
       this.subcategory = params['subcategory'];
       this.quizTopic = params['quizTopic'];
       console.log(this.quizTopic);
-
       
       this.loadQuizData();
 
       
       this.startTimer();
     });
+    
   }
 
   loadQuizData() {
@@ -120,7 +124,35 @@ export class TakeQuizComponent implements OnInit {
 
   submitQuiz(): void {
     this.checkAnswer();
-    this.showModal = true;
+    
+    const userId = localStorage.getItem('userId'); 
+    if (!userId) {
+      console.error('User ID not found in local storage');
+      return;
+    }
+  
+    if (!this.quizData) {
+      console.error('Quiz data is not available');
+      return;
+    }
+  
+    const payload = {
+      user_id: userId,
+      quiz_topic_id: this.quiz_topic_id,
+      quiz_topic_name: this.quizData.quiz_topic,
+      Score : this.score
+    };
+  
+    this.takequizService.submitQuizResults(payload).subscribe({
+      next: (response) => {
+        console.log('Quiz results submitted successfully:', response);
+        this.showModal = true; 
+      },
+      error: (error) => {
+        console.error('Error submitting quiz results:', error);
+        this.showModal = true;
+      }
+    });
   }
 
   checkAnswer(): void {
@@ -192,4 +224,5 @@ startTimer() {
     let seconds = this.remainingTime % 60;
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
   }
+
 }

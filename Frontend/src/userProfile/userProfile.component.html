@@ -1,0 +1,81 @@
+<div *ngIf="!isLoading; else loading" class="profile-wrapper">
+  <div class="color-blob blob-1"></div>
+  <div class="color-blob blob-2"></div>
+  <div class="color-blob blob-3"></div>
+  
+  <div class="profile-header">
+    <div class="profile-avatar">
+      <div class="avatar-border"></div>
+      <img [src]="defaultUserPhoto" alt="Profile" class="avatar-image">
+    </div>
+    
+    <div class="profile-title">
+      <h1 class="username">{{ userProfile?.username }}</h1>
+    </div>
+    
+    <button class="action-button" [routerLink]="'/forgotpassword'">
+      <i class="fas fa-key"></i> Reset Password
+    </button>
+  </div>
+  
+  <div class="profile-grid">
+    <div class="profile-card personal-card">
+      <div class="card-header">
+        <i class="fas fa-user-circle card-icon"></i>
+        <h2>Personal Information</h2>
+      </div>
+      <div class="card-body">
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">First Name:</span>
+            <span class="info-value">{{ userProfile?.firstname || '-' }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Last Name:</span>
+            <span class="info-value">{{ userProfile?.lastname || '-' }}</span>
+          </div>
+          <div class="info-item full-width">
+            <span class="info-label">Email:</span>
+            <span class="info-value email-value">{{ userProfile?.email || '-' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="profile-card stats-card">
+      <div class="card-header">
+        <i class="fas fa-chart-line card-icon"></i>
+        <h2>Your Statistics</h2>
+      </div>
+      <div class="card-body">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-circle rank-circle">
+              <span *ngIf="!statsLoadError; else statsError" class="stat-value">{{ userProfile?.rank || '0' }}</span>
+              <ng-template #statsError><span class="stat-value">-</span></ng-template>
+            </div>
+            <span class="stat-label">Current Rank</span>
+          </div>
+          <div class="stat-item">
+            <div class="stat-circle quiz-circle">
+              <span *ngIf="!statsLoadError; else statsError" class="stat-value">{{ userProfile?.quizzes_taken || '0' }}</span>
+              <ng-template #statsError><span class="stat-value">-</span></ng-template>
+            </div>
+            <span class="stat-label">Quizzes Completed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <div class="loading-spinner">
+      <div class="spinner-circle"></div>
+      <div class="spinner-circle"></div>
+      <div class="spinner-circle"></div>
+    </div>
+    <p>Loading your profile...</p>
+  </div>
+</ng-template>
