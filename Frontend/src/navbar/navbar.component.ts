@@ -34,4 +34,7 @@ export class NavbarComponent implements OnInit {
     this.activeComponentService.setSearchText(searchText);
   }
 }
+ navigateToProfile() {
+    this.router.navigate(['/profile']);
+  }
 }
