@@ -102,8 +102,10 @@ GET /leaderboard
 - If the quiz already exists, increases the attempt count and updates the score only if the new score is higher.
 
 **Example Request:**
-```json
+```plaintext
 POST /submitquiz
+```
+```json
 {
   "user_id": "679d5a260264697ca72d7c4a",
   "quiz_topic_id": "67c5fd91b35fea672a80a3e2",
