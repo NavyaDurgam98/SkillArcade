@@ -65,4 +65,29 @@
   .me-3 {
     margin-right: 1rem; 
   }
+
+.navbar .form-control {
+  width: 350px; 
+  height: 40px;
+  border-radius: 0; 
+  border: 2px solid #ccc; 
+  padding-left: 10px; 
+}
+
+.navbar .form-control:focus {
+  border-color: #007bff; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+}
+
+.navbar-light.bg-light {
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+
+.navbar .dropdown-menu {
+  border-radius: 10px;
+}
+
+.navbar .d-flex {
+  gap: 15px; 
+}
   

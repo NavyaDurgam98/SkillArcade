@@ -21,25 +21,23 @@ type Claims struct {
 }
 
 func init() {
-	if os.Getenv("ENVIRONMENT") != "test" {
+	if os.Getenv("GO_ENV") != "test" {
 		// Load .env file
 		err := godotenv.Load()
 		if err != nil {
-			log.Fatal("Error loading .env file")
+			log.Fatal("Error loading .env file!!!!!")
 		}
-	
 
-	// Get the JWT secret key from environment variables
-	secret := os.Getenv("JWT_SECRET")
-	if secret == "" {
-		log.Fatal("JWT_SECRET is not set in .env file")
-	}
+		// Get the JWT secret key from environment variables
+		secret := os.Getenv("JWT_SECRET")
+		if secret == "" {
+			log.Fatal("JWT_SECRET is not set in .env file")
+		}
 
-	// Convert to byte array
-	jwtSecret = []byte(secret)
+		// Convert to byte array
+		jwtSecret = []byte(secret)
 	}
 }
-
 
 // GenerateJWT generates a JWT token for a user
 func GenerateJWT(userID, username string) (string, error) {

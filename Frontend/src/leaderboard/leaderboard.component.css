@@ -1,0 +1,46 @@
+/* 1. User Rank Bar - Style the Box */
+.user-rank-bar {
+    width: 300px; 
+    margin: 20px auto; 
+    padding: 15px; 
+    background-color: #f4f4f4;
+    border: 2px solid #ddd; 
+    border-radius: 8px; 
+    text-align: center; 
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+/* 2. Leaderboard Table */
+.leaderboard-grid table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 20px;
+}
+
+/* 3. Table Header Styling */
+.leaderboard-grid th {
+    background-color: #007BFF;
+    color: white; 
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+/* 4. Table Body Styling */
+.leaderboard-grid td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd; 
+}
+
+/* 5. Add Hover Effect on Rows */
+.leaderboard-grid tbody tr:hover {
+    background-color: #f1f1f1; 
+}
+
+/* 6. Loading State */
+ng-template#loading p {
+    text-align: center;
+    font-size: 18px;
+    color: gray;
+    font-style: italic;
+}
