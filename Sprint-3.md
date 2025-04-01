@@ -15,7 +15,10 @@
 
 ## Detailed Devlopment
 
-### Backend Development  
+### Backend Development
+
+# Sprint 3 Backend Development Documentation
+
 ## UserScore Collection
 
 A new collection named `UserScore` has been created to store user quiz data. Each document in this collection contains the following fields:
@@ -30,7 +33,7 @@ A new collection named `UserScore` has been created to store user quiz data. Eac
 - `total_score`: The cumulative score obtained by the user across all quizzes.
 
 ### Sample Document
-```json
+```plaintextjson
 {
   "_id": ObjectId("67e6f5a5f2301ff2ed918420"),
   "user_id": ObjectId("679d5a260264697ca72d7c4a"),
@@ -52,7 +55,8 @@ A new collection named `UserScore` has been created to store user quiz data. Eac
   ],
   "total_score": 11
 }
-```
+```plaintext
+
 ## Leaderboard API
 
 ### 1. Get User Rank and Details
@@ -60,36 +64,36 @@ A new collection named `UserScore` has been created to store user quiz data. Eac
 - Fetches the rank, quizzes taken, score, and attempts of a specific user.
 
 **Example Request:**
-```
+```plaintext
 GET /leaderboard?user_id=679d5a260264697ca72d7c4a
-```
+```plaintext
 
 **Example Response:**
-```json
+```plaintextjson
 {
   "rank": 5,
   "username": "JohnDoe",
   "total_score": 11,
   "quizzes_taken": 2
 }
-```
+```plaintext
 
 ### 2. Get Top 10 Leaderboard
 **Endpoint:** `GET /leaderboard`
 - Retrieves the top 10 users with the highest scores, including their name, rank, score, and number of quizzes attempted.
 
 **Example Request:**
-```
+```plaintext
 GET /leaderboard
-```
+```plaintext
 
 **Example Response:**
-```json
+```plaintextjson
 [
   {"rank": 1, "username": "Alice", "total_score": 45, "quizzes_taken": 10},
   {"rank": 2, "username": "Bob", "total_score": 42, "quizzes_taken": 9}
 ]
-```
+```plaintext
 
 ## Submit Quiz API
 **Endpoint:** `POST /submitquiz`
@@ -99,74 +103,74 @@ GET /leaderboard
 - If the quiz already exists, increases the attempt count and updates the score only if the new score is higher.
 
 **Example Request:**
-```json
+```plaintextjson
 POST /submitquiz
 {
   "user_id": "679d5a260264697ca72d7c4a",
   "quiz_topic_id": "67c5fd91b35fea672a80a3e2",
   "score": 7
 }
-```
+```plaintext
 
 **Example Response:**
-```json
+```plaintextjson
 {
   "message": "Quiz submitted successfully",
   "updated": true
 }
-```
+```plaintext
 
 ## Search API
 **Endpoint:** `GET /search?q=<query>`
 - Searches for categories, subcategories, or quiz topics based on a search string of 3 or more characters.
 
 **Example Request:**
-```
+```plaintext
 GET /search?q=Java
-```
+```plaintext
 
 **Example Response:**
-```json
+```plaintextjson
 [
   {"type": "quiz_topic", "name": "Java Basics"},
   {"type": "subcategory", "name": "Java OOP Concepts"}
 ]
-```
+```plaintext
 
 ## User History API
 **Endpoint:** `GET /userhistory?user_id=<user_id>`
 - Fetches all completed quizzes for a given user, including quiz ID, name, score, attempts, and submission time.
 
 **Example Request:**
-```
+```plaintext
 GET /userhistory?user_id=679d5a260264697ca72d7c4a
-```
+```plaintext
 
 **Example Response:**
-```json
+```plaintextjson
 [
   {"quiz_id": "67c5fd91b35fea672a80a3e2", "name": "Java", "score": 6, "attempts": 2, "submitted_at": "2025-03-28T19:17:29.080+00:00"}
 ]
-```
+```plaintext
 
 ## User Profile API
 **Endpoint:** `GET /userprofile?user_id=<user_id>`
 - Retrieves basic user information from the `UserDetails` table, including name, email, username, first name, and last name.
 
 **Example Request:**
-```
+```plaintext
 GET /userprofile?user_id=679d5a260264697ca72d7c4a
-```
+```plaintext
 
 **Example Response:**
-```json
+```plaintextjson
 {
   "username": "JohnDoe",
   "email": "john.doe@example.com",
   "first_name": "John",
   "last_name": "Doe"
 }
-```
+```plaintext
 
 ### Backend Testing
 
