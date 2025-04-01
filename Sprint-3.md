@@ -55,7 +55,10 @@ The "X" button.
 Anywhere outside the popup area.
 
  
-### Frontend Testing
+### Frontend Testing:([[List of Frontend Unit Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/84)](https://github.com/NavyaDurgam98/SkillArcade/issues/84))
+- **Jasmine & Karma Unit Tests**:
+  - Developed test cases for **Navigation Bar Component, Leader Board Component, User Profile Component**.
+  - Ensured each component met expected functionality and behavior.
 
 
 
