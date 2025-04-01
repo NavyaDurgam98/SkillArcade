@@ -182,7 +182,14 @@ GET /userprofile?user_id=679d5a260264697ca72d7c4a
 }
 ```
 
-### Backend Testing([[List of BackEnd Unit Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/86)](https://github.com/NavyaDurgam98/SkillArcade/issues/86))
+### Backend Testing ([List of BackEnd Unit Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/86))
+
+- Unit tests were added for Category, Subcategory, and Quiz Topic services to validate the new `searchText` functionality, covering both filtered and unfiltered API behavior.
+
+- Test cases handle various scenarios including successful fetches, no matches, short search inputs, and simulated MongoDB errors using `mtest`.
+
+- The tests ensure reliable and robust search logic by verifying case-insensitive filtering, minimum character validation, and proper fallback behavior when data is missing or invalid.
+
 
 
 ### Frontend Development
