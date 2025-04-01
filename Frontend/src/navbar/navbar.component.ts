@@ -37,4 +37,7 @@ export class NavbarComponent implements OnInit {
  navigateToProfile() {
     this.router.navigate(['/profile']);
   }
+navigateToLeaderBoard(){
+    this.router.navigate(['/leaderboard']);
+  }
 }

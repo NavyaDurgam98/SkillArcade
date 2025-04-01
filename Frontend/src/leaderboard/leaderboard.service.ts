@@ -22,7 +22,7 @@ export class LeaderboardService {
   }
 
   // Fetch the current user's rank data
-  getUserRank(userId: string): Observable<any> {
+  getUserRank(userId: string|null): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}?user_id=${userId}`).pipe(
       catchError(error => {
         console.error('API error:', error);

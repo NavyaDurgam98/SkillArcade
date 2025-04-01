@@ -27,7 +27,7 @@ export class LeaderboardComponent implements OnInit {
   }
 
   loadLeaderboard(): void {
-    const userId = '679d5a260264697ca72d7c4a'; // Replace with the actual logged-in user ID
+    const userId :string|null= localStorage.getItem('userId');
     this.isLoading = true;  // Set loading state to true before fetching data
 
     // Fetch full leaderboard first
