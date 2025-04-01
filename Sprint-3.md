@@ -123,19 +123,25 @@ POST /submitquiz
 
 ---
 ## Search API
-**Endpoint:** `GET /search?q=<query>`
+**Endpoint:** `GET /Component?searchText=<text>`
 - Searches for categories, subcategories, or quiz topics based on a search string of 3 or more characters.
 
 **Example Request:**
 ```plaintext
-GET /search?q=Java
+GET /categories?searchText=compu
 ```
 
 **Example Response:**
 ```json
 [
-  {"type": "quiz_topic", "name": "Java Basics"},
-  {"type": "subcategory", "name": "Java OOP Concepts"}
+    {
+        "category": "Computer Science",
+        "imgPath": "imgCS1.png"
+    },
+    {
+        "category": "Cloud Computing",
+        "imgPath": "img1.png"
+    }
 ]
 ```
 
