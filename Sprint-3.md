@@ -15,7 +15,7 @@
 
 ## Detailed Devlopment
 
-# Sprint 3 Backend Development Documentation
+# Backend Development
 
 ## UserScore Collection
 A new collection named `UserScore` has been created to store user quiz data. Each document in this collection contains the following fields:
@@ -32,18 +32,18 @@ A new collection named `UserScore` has been created to store user quiz data. Eac
 ### Sample Document
 ```json
 {
-  "_id": ObjectId("67e6f5a5f2301ff2ed918420"),
-  "user_id": ObjectId("679d5a260264697ca72d7c4a"),
+  "_id": str(ObjectId("67e6f5a5f2301ff2ed918420")),
+  "user_id": str(ObjectId("679d5a260264697ca72d7c4a")),
   "quizzes": [
     {
-      "quiz_topic_id": ObjectId("67c5fd91b35fea672a80a3e2"),
+      "quiz_topic_id": str(ObjectId("67c5fd91b35fea672a80a3e2")),
       "quiz_topic_name": "Java",
       "score": 6,
       "attempts": 2,
       "submitted_at": "2025-03-28T19:17:29.080+00:00"
     },
     {
-      "quiz_topic_id": ObjectId("67c5fd91b35fea672a80a3e1"),
+      "quiz_topic_id": str(ObjectId("67c5fd91b35fea672a80a3e1")),
       "quiz_topic_name": "C++",
       "score": 5,
       "attempts": 2,
