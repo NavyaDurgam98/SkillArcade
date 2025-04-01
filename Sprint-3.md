@@ -2,7 +2,7 @@
 
 
 ## Visual Demo Links
-- [DEMO](https://tinyurl.com/mrykh238)
+- [DEMO](https://shorturl.at/3hXCB)
 
 
 
