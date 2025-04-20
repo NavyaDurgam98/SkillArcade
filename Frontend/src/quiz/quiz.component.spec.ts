@@ -18,9 +18,9 @@ describe('QuizComponent', () => {
   };
 
   const mockQuizTopics = [
-    { quiz_topic: 'C++ Basics' },
-    { quiz_topic: 'Java Fundamentals' },
-    { quiz_topic: 'Python Essentials' }
+    {quiz_topic_id:"1" , quiz_topic_name: 'C++ Basics',    quizImgPath: '/assets/angular.png'   },
+    {quiz_topic_id:"2", quiz_topic_name: 'Java Fundamentals',    quizImgPath: '/assets/angular.png'  },
+    { quiz_topic_id:"3" ,quiz_topic_name: 'Python Essentials' ,   quizImgPath: '/assets/angular.png'   }
   ];
 
   beforeEach(async () => {
@@ -64,7 +64,7 @@ describe('QuizComponent', () => {
     const quizTopicTitles = fixture.debugElement.queryAll(By.css('.card-title'));
 
     quizTopicTitles.forEach((element, index) => {
-      expect(element.nativeElement.textContent.trim()).toBe(mockQuizTopics[index].quiz_topic);
+      expect(element.nativeElement.textContent.trim()).toBe(mockQuizTopics[index].quiz_topic_name);
     });
   });
 
@@ -82,7 +82,7 @@ describe('QuizComponent', () => {
 
     button.nativeElement.click();
 
-    expect(component.takeQuiz).toHaveBeenCalledWith(mockQuizTopics[0].quiz_topic);
+    expect(component.takeQuiz).toHaveBeenCalledWith(mockQuizTopics[0].quiz_topic_name,mockQuizTopics[0].quiz_topic_id);
   });
 
   // 5. Handle empty quiz topics gracefully

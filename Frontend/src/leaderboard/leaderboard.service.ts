@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LeaderboardService {
-  private apiUrl = 'http://localhost:8080/leaderboard'; // Base URL
+  private apiUrl = 'http://localhost:8080/leaderboard'; 
 
   constructor(private http: HttpClient) {}
 

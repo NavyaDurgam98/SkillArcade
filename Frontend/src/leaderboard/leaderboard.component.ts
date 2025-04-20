@@ -27,8 +27,8 @@ export class LeaderboardComponent implements OnInit {
   }
 
   loadLeaderboard(): void {
-    const userId :string|null= localStorage.getItem('userId');
-    this.isLoading = true;  // Set loading state to true before fetching data
+    const userId :string|null= localStorage.getItem('userId'); //'679d5a260264697ca72d7c4a'; 
+    this.isLoading = true; 
 
     // Fetch full leaderboard first
     this.leaderboardService.getLeaderboard().subscribe({
@@ -42,7 +42,7 @@ export class LeaderboardComponent implements OnInit {
             console.log("User Data:", userData);
             this.currentUserRank = userData.rank ?? 0;
             this.attemptsMade = userData.quizzes_taken ?? 0;
-            this.currentUser = userData; // Store current user's data
+            this.currentUser = userData; 
           },
           error: (error) => {
             console.error("Error fetching user rank:", error);

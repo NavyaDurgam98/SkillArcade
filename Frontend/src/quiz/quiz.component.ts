@@ -62,8 +62,9 @@ export class QuizComponent implements OnInit, OnDestroy {
     });
   }
 
-  takeQuiz(quizTopicId: string) {
-    this.router.navigate([`/${this.categoryName}/${this.subCategoryName}/${quizTopicId}/takequiz`]);
+  takeQuiz(quiz_topic_name : string,quiz_topic_id:string) {
+    sessionStorage.setItem('currentQuizId', quiz_topic_id);
+    this.router.navigate([`/${this.categoryName}/${this.subCategoryName}/${quiz_topic_name}/takequiz`]);
   }
 
   ngOnDestroy() {

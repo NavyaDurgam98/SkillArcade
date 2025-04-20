@@ -1,8 +1,8 @@
-/* 1. User Rank Bar - Style the Box */
+
 .user-rank-bar {
     width: 300px; 
     margin: 20px auto; 
-    padding: 15px; 
+    padding: 15px;
     background-color: #f4f4f4;
     border: 2px solid #ddd; 
     border-radius: 8px; 
@@ -19,7 +19,7 @@
 
 /* 3. Table Header Styling */
 .leaderboard-grid th {
-    background-color: #007BFF;
+    background-color: #007BFF; 
     color: white; 
     padding: 10px;
     cursor: pointer;

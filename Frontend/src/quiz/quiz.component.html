@@ -7,7 +7,7 @@
         <img [src]="'assets/' + quiz.quizImgPath" class="card-img-top" alt="{{ quiz.quiz_topic_name }} Image" height="200px">
         <div class="card-body">
           <h5 class="card-title">{{ quiz.quiz_topic_name }}</h5>
-          <button (click)="takeQuiz(quiz.quiz_topic_id)" class="btn btn-primary">Take Quiz</button>
+          <button (click)="takeQuiz(quiz.quiz_topic_name,quiz.quiz_topic_id)" class="btn btn-primary">Take Quiz</button>
         </div>
       </div>
     </div>

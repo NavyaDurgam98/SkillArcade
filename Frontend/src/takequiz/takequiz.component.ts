@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -224,5 +223,4 @@ startTimer() {
     let seconds = this.remainingTime % 60;
     return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
   }
-
 }

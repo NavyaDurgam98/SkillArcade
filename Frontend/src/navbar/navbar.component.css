@@ -65,7 +65,7 @@
   .me-3 {
     margin-right: 1rem; 
   }
-
+  
 .navbar .form-control {
   width: 350px; 
   height: 40px;
@@ -83,11 +83,8 @@
   background-color: rgba(255, 255, 255, 0.8); 
 }
 
-.navbar .dropdown-menu {
-  border-radius: 10px;
-}
+
 
 .navbar .d-flex {
   gap: 15px; 
 }
-  

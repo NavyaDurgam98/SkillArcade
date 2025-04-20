@@ -24,6 +24,10 @@
   width: 100%;
   max-width: 1200px;
   margin-top: 100px;
+  /* display: flex;*/
+  /* justify-content: center;  */
+}
+.card-wrapper {
   display: flex;
   justify-content: center;
 }
