@@ -10,6 +10,9 @@
     text-shadow: 0 0 10px rgba(93, 64, 55, 1); 
   }
   
+.hidden {
+  display: none !important;
+}
 
 /* body {
     font-family: 'Poppins', sans-serif;
