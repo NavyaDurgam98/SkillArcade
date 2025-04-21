@@ -8,17 +8,18 @@ import { TakeQuizComponent } from '../takequiz/takequiz.component';
 import {ForgotPasswordComponent} from '../forgot-password/forgot-password.component';
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import {UserProfileComponent} from '../userProfile/userProfile.component'
+import { AuthGuard } from './auth.gaurd';
 
 
 const routes: Routes = [
   { path: 'login', loadChildren: () => import('../login/login.module').then(m => m.LoginModule) },
   { path: 'signup', component: SignupComponent },
-  { path: 'profile', component: UserProfileComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'leaderboard', component: LeaderboardComponent },
-  { path: ':category', component: CategoryComponent } ,
-  { path: ':category/:sub_category', component: QuizComponent },
-  { path: ':category/:subcategory/:quizTopic/takequiz', component: TakeQuizComponent },
+  { path: 'profile', component: UserProfileComponent, canActivate:[AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard] },
+  { path: 'leaderboard', component: LeaderboardComponent,canActivate:[AuthGuard] },
+  { path: ':category', component: CategoryComponent,canActivate:[AuthGuard] } ,
+  { path: ':category/:sub_category', component: QuizComponent,canActivate:[AuthGuard] },
+  { path: ':category/:subcategory/:quizTopic/takequiz', component: TakeQuizComponent,canActivate:[AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
