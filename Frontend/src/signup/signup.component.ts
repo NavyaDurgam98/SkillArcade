@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ValidationErrors, AbstractControl, 
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { environment } from '../environments/environment';
 
 export const passwordMatchValidator: ValidatorFn = (formGroup: AbstractControl): ValidationErrors | null => {
   const password = formGroup.get('password')?.value;
