@@ -1,0 +1,13 @@
+[
+    { "category": "Computer Science", "imgPath": "imgCS1.png" },
+    { "category": "Web Development", "imgPath": "img1.png" },
+    { "category": "Cybersecurity", "imgPath": "img1.png" },
+    { "category": "Artificial Intelligence & Machine Learning", "imgPath": "img1.png" },
+    { "category": "Cloud Computing", "imgPath": "img1.png" },
+    { "category": "Databases", "imgPath": "img1.png" },
+    { "category": "Operating Systems", "imgPath": "img1.png" },
+    { "category": "Software Engineering", "imgPath": "img1.png" },
+    { "category": "Networking", "imgPath": "img1.png" },
+    { "category": "DevOps & Automation", "imgPath": "img1.png" }
+  ]
+  
