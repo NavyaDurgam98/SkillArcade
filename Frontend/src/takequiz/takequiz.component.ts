@@ -50,20 +50,29 @@ export class TakeQuizComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.category = params['category'];
       this.subcategory = params['subcategory'];
-      this.quizTopic = params['quizTopic'];
+      this.quizTopic = decodeURIComponent(params['quizTopic']);
       console.log(this.quizTopic);
       
       this.loadQuizData();
-
-      
-      this.startTimer();
+      this.loadQuizTopics();
     });
     
   }
 
+  loadQuizTopics(): void {
+    this.takequizService.getQuizTopics(this.category,this.subcategory).subscribe({
+      next: (topics) => {
+        console.log("Topics received:", topics);
+        this.quizTopicsList = topics;
+      },
+      error: (err) => {
+        console.error('Failed to load quiz topics list', err);
+      }
+    });
+  }
+
   loadQuizData() {
     this.loading = true;
-
     this.takequizService.getQuizData(this.quizTopic).subscribe(
       data => {
         console.log("Fetched API Data:", data);
@@ -86,6 +95,7 @@ export class TakeQuizComponent implements OnInit {
   }
 
   selectTopic(quizTopic: string): void {
+    const encodedTopic = encodeURIComponent(quizTopic);
     this.quizTopic = quizTopic;
     this.loading = true;
     this.quizStarted = false;
@@ -94,7 +104,7 @@ export class TakeQuizComponent implements OnInit {
     this.score = 0;
 
     // Navigate to new quiz topic
-    this.router.navigate(['/', this.category, this.subcategory, this.quizTopic, 'takequiz']).then(() => {
+    this.router.navigate(['/', this.category, this.subcategory, encodedTopic, 'takequiz']).then(() => {
       this.loadQuizData();
     });
   }
@@ -108,6 +118,11 @@ export class TakeQuizComponent implements OnInit {
     this.currentQuestionIndex = 0;
     this.selectedAnswer = null;
     this.score = 0;
+
+    this.remainingTime = 100; // reset time
+    this.showTimeWarning = false;
+    this.showWarning = false;
+    this.startTimer();
   }
 
   selectAnswer(optionId: number): void {
@@ -123,8 +138,13 @@ export class TakeQuizComponent implements OnInit {
   }
 
   submitQuiz(): void {
-    this.checkAnswer();
-    
+    this.checkAnswer(); // Check final answer before scoring
+    // Show score popup
+    this.showModal = true;
+  
+    // Don’t reset quizTopic/quizData here — keep quiz on screen
+    this.quizStarted = false;
+  
     const userId = localStorage.getItem('userId'); 
     if (!userId) {
       console.error('User ID not found in local storage');
@@ -140,20 +160,19 @@ export class TakeQuizComponent implements OnInit {
       user_id: userId,
       quiz_topic_id: this.quiz_topic_id,
       quiz_topic_name: this.quizData.quiz_topic,
-      Score : this.score
+      Score: this.score
     };
   
     this.takequizService.submitQuizResults(payload).subscribe({
       next: (response) => {
         console.log('Quiz results submitted successfully:', response);
-        this.showModal = true; 
       },
       error: (error) => {
         console.error('Error submitting quiz results:', error);
-        this.showModal = true;
       }
     });
   }
+  
 
   checkAnswer(): void {
     if (this.quizData && this.selectedAnswer === this.quizData.questions[this.currentQuestionIndex].correct_option) {
@@ -179,6 +198,7 @@ export class TakeQuizComponent implements OnInit {
     this.score = 0;
     this.selectedAnswer = null;
     this.showModal = false;
+    this.quizStarted = true;
   }
 
   isLastQuestion(): boolean {
@@ -196,7 +216,6 @@ export class TakeQuizComponent implements OnInit {
 
   // New method to start the timer
   showTimeWarning: boolean = false;  
-
 startTimer() {
   const timer = setInterval(() => {
     if (this.remainingTime > 0) {

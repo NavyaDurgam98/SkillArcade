@@ -67,6 +67,12 @@ html, body {
     color: white;
 }
 
+.quiz-sidebar li.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .quiz-content {
     width: 75%;
     height: 100vh;
