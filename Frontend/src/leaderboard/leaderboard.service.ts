@@ -7,7 +7,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LeaderboardService {
-  private apiUrl = `${environment.protectedApiUrl}/leaderboard`
+  private apiUrl = `${environment.protectedApiUrl}/leaderboard`;
 
   constructor(private http: HttpClient) {}
 
