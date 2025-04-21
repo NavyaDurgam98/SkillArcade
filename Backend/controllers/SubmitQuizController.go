@@ -34,6 +34,6 @@ func SubmitQuiz(c *gin.Context) {
 	})
 }
 
-func SubmitQuizRouter(router *gin.Engine) {
+func SubmitQuizRouter(router *gin.RouterGroup) {
 	router.POST("/submitquiz", SubmitQuiz)
 }
