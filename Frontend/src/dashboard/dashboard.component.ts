@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   logout() {
+    localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
   }
   
