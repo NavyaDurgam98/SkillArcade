@@ -9,6 +9,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func UserLoginService(c context.Context, user *models.UserLogin) (string, string, error) {
@@ -25,7 +26,13 @@ func UserLoginService(c context.Context, user *models.UserLogin) (string, string
 	}
 
 	// Check if the passwords match
-	if userExists["password"] != user.Password {
+	hashedPassword, ok := userExists["password"].(string)
+	if !ok {
+		return user.Username, "", errors.New("stored password format is invalid")
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(user.Password))
+	if err != nil {
 		//c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid password"})
 		return user.Username, "", errors.New("invalid password")
 	}
