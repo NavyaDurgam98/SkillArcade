@@ -3,13 +3,20 @@
   <div class="quiz-sidebar">
       <h3> {{ category }} > {{ subcategory }}</h3>
       <ul>
-          <li *ngFor="let topic of quizTopicsList" [class.active]="quizTopic === topic">
-              <a [routerLink]="['/', category, subcategory, topic, 'takequiz']"
-                 (click)="selectTopic(topic)">
-                  {{ topic }}
-              </a>
-          </li>
-      </ul>
+        <li
+          *ngFor="let topic of quizTopicsList"
+          [class.active]="quizTopic === topic.quiz_topic_name"
+          [class.disabled]="quizStarted && quizTopic !== topic.quiz_topic_name"
+        >
+          <a
+            [routerLink]="['/takequiz', category, subcategory, topic.quiz_topic_name]"
+            (click)="!quizStarted && selectTopic(topic.quiz_topic_name)"
+            [class.disabled-link]="quizStarted && quizTopic !== topic.quiz_topic_name"
+          >
+            {{ topic.quiz_topic_name }}
+          </a>
+        </li>
+      </ul>     
   </div>
 <!-- Right Panel: Quiz Form -->
 <div class="quiz-content" *ngIf="!loading">

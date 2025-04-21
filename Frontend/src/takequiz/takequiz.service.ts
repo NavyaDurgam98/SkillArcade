@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +14,11 @@ export class TakequizService {
   // Fetch quiz topics for a specific category and subcategory
   getQuizTopics(category: string, subcategory: string): Observable<string[]> {
     const url = `${this.baseUrl}/categories/${category}/subcategories/${subcategory}/quiz_topics`;
-    return this.http.get<string[]>(url).pipe(
+    return this.http.get<{ quiz_topics: any[] }>(url).pipe(
+      map((res: { quiz_topics: any; }) => res.quiz_topics),
       catchError((error) => {
         console.error('Error fetching quiz topics:', error);
-        throw error;  // Rethrow error to handle it elsewhere (e.g., in component)
+        throw error;
       })
     );
   }

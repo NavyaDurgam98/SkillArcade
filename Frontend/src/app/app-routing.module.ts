@@ -16,7 +16,6 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'leaderboard', component: LeaderboardComponent },
-  {path:'forgotpassword',component:ForgotPasswordComponent},
   { path: ':category', component: CategoryComponent } ,
   { path: ':category/:sub_category', component: QuizComponent },
   { path: ':category/:subcategory/:quizTopic/takequiz', component: TakeQuizComponent },
