@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TakequizService {
-  private baseUrl = 'http://localhost:8080';  // Base URL for your API
+  private baseUrl = `${environment.protectedApiUrl}`;  
 
   constructor(private http: HttpClient) { }
 

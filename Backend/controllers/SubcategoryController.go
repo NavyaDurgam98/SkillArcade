@@ -22,6 +22,6 @@ func GetSubCategories(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, subCategories)
 }
-func SubCategoryRouter(r *gin.Engine) {
+func SubCategoryRouter(r *gin.RouterGroup) {
 	r.GET("/categories/:category", GetSubCategories)
 }

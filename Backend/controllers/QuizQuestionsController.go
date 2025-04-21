@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func QuizQuestionsRouter(r *gin.Engine) {
+func QuizQuestionsRouter(r *gin.RouterGroup) {
 	r.GET("/quiz/:quizTopic", GetQuizQuestions)
 }
 

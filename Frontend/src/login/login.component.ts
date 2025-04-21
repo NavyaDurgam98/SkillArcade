@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -48,7 +49,7 @@ export class LoginComponent {
     });
     if (this.isForgotPassword) {
       const email = this.loginForm.get('email')?.value;
-      this.http.post('http://localhost:8080/forgotpassword', { email })
+      this.http.post(`${environment.baseApiUrl}/forgotpassword`, { email })
         .subscribe({
           next: () => {
             alert('Password reset instructions have been sent to your email.');
@@ -65,7 +66,7 @@ export class LoginComponent {
       if (this.loginForm.valid) {
         const { username, password } = this.loginForm.value;
         const payload = { username: username, password: password }; 
-        this.http.post<{ token: string, user_id: string }>('http://localhost:8080/signin', payload).subscribe({
+        this.http.post<{ token: string, user_id: string }>(`${environment.baseApiUrl}/signin`, payload).subscribe({
           next: (response) => {
             localStorage.setItem('authToken', response.token); 
             localStorage.setItem('userId', response.user_id); 

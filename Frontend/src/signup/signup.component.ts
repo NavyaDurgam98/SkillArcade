@@ -1,8 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidationErrors, AbstractControl, ValidatorFn, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { environment } from '../environments/environment';
+
+export const passwordMatchValidator: ValidatorFn = (formGroup: AbstractControl): ValidationErrors | null => {
+  const password = formGroup.get('password')?.value;
+  const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+  return password && confirmPassword && password !== confirmPassword
+    ? { passwordMismatch: true }
+    : null;
+};
 
 @Component({
   selector: 'app-signup',
@@ -30,7 +40,7 @@ export class SignupComponent {
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
-    });
+    }, { validators: passwordMatchValidator });
   }
 
   onSubmit() {
@@ -38,10 +48,11 @@ export class SignupComponent {
       const control = this.signupForm.get(field);
       control?.markAsTouched();
     });
+
     if (this.signupForm.valid) {
-      this.http.post('http://localhost:8080/signup', this.signupForm.value)
+      this.http.post(`${environment.baseApiUrl}/signup`, this.signupForm.value)
         .subscribe({
-          next: (response) => {
+          next: () => {
             this.successMessage = 'Sign up successful! Please log in.';
             this.errorMessage = '';
             setTimeout(() => {
@@ -54,7 +65,6 @@ export class SignupComponent {
             console.error('Signup Error:', error);
           }
         });
-
     } else {
       console.log('Form is invalid');
     }

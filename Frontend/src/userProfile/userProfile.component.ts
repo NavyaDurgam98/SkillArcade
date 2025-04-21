@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { environment } from '../environments/environment';
 
 export interface UserProfile {
   username: string;
@@ -29,8 +30,8 @@ export interface LeaderboardStats {
 export class UserProfileComponent {
   userProfile: UserProfile | null = null;
   defaultUserPhoto = '../assets/user-icon.png';
-  readonly profileApiUrl = 'http://localhost:8080/userprofile';
-  readonly leaderboardApiUrl = 'http://localhost:8080/leaderboard';
+  readonly profileApiUrl = `${environment.protectedApiUrl}/userprofile`;
+  readonly leaderboardApiUrl = `${environment.protectedApiUrl}/leaderboard`;
   isLoading = true;
   profileLoadError = false;
   statsLoadError = false;

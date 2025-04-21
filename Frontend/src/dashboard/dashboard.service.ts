@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 // Define the Category interface
 interface Category {
@@ -13,7 +14,7 @@ interface Category {
   providedIn: 'root'
 })
 export class DashboardService {
-  private url = 'http://localhost:8080/categories'; 
+  private url = `${environment.protectedApiUrl}/categories`; 
 
   constructor(private http: HttpClient) {}
 

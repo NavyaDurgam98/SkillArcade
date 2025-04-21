@@ -20,6 +20,6 @@ func GetCategories(c *gin.Context) {
 
 	c.JSON(http.StatusOK, categories)
 }
-func CategoryRouter(r *gin.Engine) {
+func CategoryRouter(r *gin.RouterGroup) {
 	r.GET("/categories", GetCategories)
 }

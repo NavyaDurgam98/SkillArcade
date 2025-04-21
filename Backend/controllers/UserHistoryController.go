@@ -32,6 +32,6 @@ func GetUserHistory(c *gin.Context) {
 	c.JSON(http.StatusOK, userHistory)
 }
 
-func UserHistoryRouter(router *gin.Engine) {
+func UserHistoryRouter(router *gin.RouterGroup) {
 	router.GET("/userhistory", GetUserHistory)
 }
