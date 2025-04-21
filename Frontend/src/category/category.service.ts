@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoryService {
-  private url = 'http://localhost:8080/categories/'; 
+  private url = `${environment.protectedApiUrl}/categories/`; 
 
   constructor(private http: HttpClient) {}
 

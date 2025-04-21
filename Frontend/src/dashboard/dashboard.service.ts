@@ -13,7 +13,7 @@ interface Category {
   providedIn: 'root'
 })
 export class DashboardService {
-  private url = 'http://localhost:8080/categories'; 
+  private url = `${environment.protectedApiUrl}/categories`; 
 
   constructor(private http: HttpClient) {}
 

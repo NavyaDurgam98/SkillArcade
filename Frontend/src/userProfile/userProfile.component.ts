@@ -29,8 +29,8 @@ export interface LeaderboardStats {
 export class UserProfileComponent {
   userProfile: UserProfile | null = null;
   defaultUserPhoto = '../assets/user-icon.png';
-  readonly profileApiUrl = 'http://localhost:8080/userprofile';
-  readonly leaderboardApiUrl = 'http://localhost:8080/leaderboard';
+  readonly profileApiUrl = `${environment.protectedApiUrl}/userprofile`;
+  readonly leaderboardApiUrl = `${environment.protectedApiUrl}/leaderboard`;
   isLoading = true;
   profileLoadError = false;
   statsLoadError = false;

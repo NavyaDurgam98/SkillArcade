@@ -49,7 +49,7 @@ export class SignupComponent {
     });
 
     if (this.signupForm.valid) {
-      this.http.post('http://localhost:8080/signup', this.signupForm.value)
+      this.http.post(`${environment.baseApiUrl}/signup`, this.signupForm.value)
         .subscribe({
           next: () => {
             this.successMessage = 'Sign up successful! Please log in.';

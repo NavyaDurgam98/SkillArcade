@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class TakequizService {
-  private baseUrl = 'http://localhost:8080';  // Base URL for your API
+  private baseUrl = `${environment.protectedApiUrl}`;  
 
   constructor(private http: HttpClient) { }
 
