@@ -33,14 +33,7 @@ func main() {
 	controllers.UserRegisterRouter(r)
 	controllers.ForgotRouter(r)
 	controllers.ResetRouter(r)
-	controllers.CategoryRouter(r)
-	controllers.SubCategoryRouter(r)
-	controllers.QuizTopicRouter(r)
-	controllers.QuizQuestionsRouter(r)
-	controllers.SubmitQuizRouter(r)
-	controllers.LeaderboardRouter(r)
-	controllers.UserHistoryRouter(r)
-	controllers.UserProfileRouter(r)
+	
 
 	// Protected routes (require JWT authentication)
 	protected := r.Group("/api")
@@ -51,6 +44,14 @@ func main() {
 			c.JSON(http.StatusOK, gin.H{"message": "Welcome to the Dashboard!", "user": username})
 		})
 	}
+	controllers.CategoryRouter(protected)
+	controllers.SubCategoryRouter(protected)
+	controllers.QuizTopicRouter(protected)
+	controllers.QuizQuestionsRouter(protected)
+	controllers.SubmitQuizRouter(protected)
+	controllers.LeaderboardRouter(protected)
+	controllers.UserHistoryRouter(protected)
+	controllers.UserProfileRouter(protected)
 
 	// Run server on port 8080
 	r.Run(":8080")
