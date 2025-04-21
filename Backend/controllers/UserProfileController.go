@@ -32,6 +32,6 @@ func GetUserProfile(c *gin.Context) {
 	c.JSON(http.StatusOK, profile)
 }
 
-func UserProfileRouter(router *gin.Engine) {
+func UserProfileRouter(router *gin.RouterGroup) {
 	router.GET("/userprofile", GetUserProfile)
 }
