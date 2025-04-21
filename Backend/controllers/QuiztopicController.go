@@ -39,6 +39,6 @@ func GetQuizTopics(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"quiz_topics": quizTopics})
 }
 
-func QuizTopicRouter(r *gin.Engine) {
+func QuizTopicRouter(r *gin.RouterGroup) {
 	r.GET("/categories/:category/subcategories/:sub_category/quiz_topics", GetQuizTopics)
 }
