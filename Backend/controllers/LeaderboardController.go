@@ -30,6 +30,6 @@ func GetLeaderboard(c *gin.Context) {
 	}
 }
 
-func LeaderboardRouter(router *gin.Engine) {
+func LeaderboardRouter(router *gin.RouterGroup) {
 	router.GET("/leaderboard", GetLeaderboard)
 }
