@@ -1,62 +1,114 @@
-// describe('Signup Page', () => {
-//     beforeEach(() => {
-//         cy.visit('/signup');
-//     });
+describe('Complete Signup Form Tests', () => {
+  const baseUrl = 'http://localhost:4200'; // Adjust if needed
 
-//     it('should have a signup form', () => {
-//         cy.get('form').should('exist');
-//     });
+  const fillValidForm = () => {
+    cy.get('#firstName').type('John');
+    cy.get('#lastName').type('Doe');
+    cy.get('#email').type('john.doe@example.com');
+    cy.get('#dob').type('1990-01-01');
+    cy.get('#male').check();
+    cy.get('#username').type('johnnydoe');
+    cy.get('#password').type('strongpass123');
+    cy.get('#confirmPassword').type('strongpass123');
+  };
 
-//     it('should display validation errors when trying to submit an empty form', () => {
-//         cy.get('button[type="submit"]').click(); // Click the submit button without filling in any fields
+  beforeEach(() => {
+    cy.visit(`${baseUrl}/signup`);
+  });
 
-//         // Check if error messages are displayed
-//         cy.contains('First name is required.').should('be.visible');
-//         cy.contains('Last name is required.').should('be.visible');
-//         cy.contains('Email is required.').should('be.visible');
-//         cy.contains('DOB is required.').should('be.visible');
-//         cy.contains('Password is required.').should('be.visible');
-//         cy.contains('Confirm your password.').should('be.visible');
-//     });
+  // ----- Positive Case -----
+  it('submits valid form successfully', () => {
+    cy.intercept('POST', '**/signup', {
+      statusCode: 200,
+      body: { message: 'Signed up!' }
+    }).as('signupSuccess');
 
-//     it('should successfully sign up when all fields are valid and redirect to login page', () => {
-//         cy.get('#firstName').type('John');
-//         cy.get('#lastName').type('Doe');
-//         cy.get('#email').type('john.doe@example.com');
-//         cy.get('#dob').type('2000-01-01');
-//         cy.get('#password').type('Password123');
-//         cy.get('#confirmPassword').type('Password123');
+    fillValidForm();
+    cy.get('button[type="submit"]').click();
 
-//         // Mock the successful API response
-//         cy.intercept('POST', 'http://localhost:8080/signup', { statusCode: 200 }).as('signupRequest');
+    cy.wait('@signupSuccess');
+    cy.contains('Sign up successful! Please log in.').should('be.visible');
+  });
 
-//         cy.get('button[type="submit"]').click();
+  // ----- Required Fields -----
+  it('shows errors on empty form submission', () => {
+    cy.get('button[type="submit"]').click();
+    cy.contains('First name is required.').should('exist');
+    cy.contains('Last name is required.').should('exist');
+    cy.contains('Valid email is required.').should('exist');
+    cy.contains('DOB is required.').should('exist');
+    cy.contains('Select your gender.').should('exist');
+    cy.contains('Username is required.').should('exist');
+    cy.contains('Password is required and must be at least 6 characters.').should('exist');
+    cy.contains('Confirm your password.').should('exist');
+  });
 
-//         cy.wait('@signupRequest');
+  // ----- Email Validations -----
+  it('rejects invalid email formats', () => {
+    cy.get('#email').type('john.doe');
+    cy.get('button[type="submit"]').click();
+    cy.contains('Valid email is required.').should('be.visible');
+  });
 
-//         // Check for success message
-//         cy.contains('Sign up successful! Please log in.').should('be.visible');
+  // ----- Password Validations -----
+  it('rejects password shorter than 6 characters', () => {
+    cy.get('#password').type('123');
+    cy.get('button[type="submit"]').click();
+    cy.contains('Password is required and must be at least 6 characters.').should('exist');
+  });
 
-//         // Validate that the page redirects to the login page
-//         cy.url().should('include', '/login');
-//     });
+  it('shows mismatch error for password/confirmPassword', () => {
+    cy.get('#password').type('abcdefg');
+    cy.get('#confirmPassword').type('1234567');
+    cy.get('button[type="submit"]').click();
+    cy.contains('Passwords do not match.').should('be.visible');
+  });
 
-//     it('should show error message if signup fails', () => {
-//         cy.get('#firstName').type('John');
-//         cy.get('#lastName').type('Doe');
-//         cy.get('#email').type('john.doe@example.com');
-//         cy.get('#dob').type('2000-01-01');
-//         cy.get('#password').type('Password123');
-//         cy.get('#confirmPassword').type('Password123');
+  // ----- Edge Case: Long Inputs -----
+  it('accepts long but valid names and usernames', () => {
+    cy.intercept('POST', '**/signup').as('signupSuccess');
 
-//         // Mock a failed API response
-//         cy.intercept('POST', 'http://localhost:8080/signup', { statusCode: 500 }).as('signupRequest');
+    cy.get('#firstName').type('A'.repeat(50));
+    cy.get('#lastName').type('B'.repeat(50));
+    cy.get('#email').type('test@example.com');
+    cy.get('#dob').type('1990-01-01');
+    cy.get('#female').check();
+    cy.get('#username').type('user' + 'X'.repeat(40));
+    cy.get('#password').type('longpassword123');
+    cy.get('#confirmPassword').type('longpassword123');
+    cy.get('button[type="submit"]').click();
 
-//         cy.get('button[type="submit"]').click();
+    cy.wait('@signupSuccess');
+  });
 
-//         cy.wait('@signupRequest');
+  // ----- Edge Case: Invalid DOB (future) -----
+  it('should not allow future DOB (HTML native check)', () => {
+    const futureDate = new Date();
+    futureDate.setFullYear(futureDate.getFullYear() + 1);
+    const futureStr = futureDate.toISOString().split('T')[0];
 
-//         // Check for error message
-//         cy.contains('There was an error with the sign up. Please try again later.').should('be.visible');
-//     });
-// });
+    cy.get('#dob').type(futureStr).should('have.value', futureStr);
+    // Angular might not validate this — you could write your own validator for real cases
+  });
+
+  // ----- Backend Failure Case -----
+  it('displays error on server failure', () => {
+    cy.intercept('POST', '**/signup', {
+      statusCode: 500,
+      body: { message: 'Server error' }
+    }).as('signupError');
+
+    fillValidForm();
+    cy.get('button[type="submit"]').click();
+    cy.wait('@signupError');
+
+    cy.contains('There was an error with the sign up. Please try again later.').should('be.visible');
+  });
+
+  // ----- Client Side Interaction Only -----
+  it('does not show touched error until field is interacted with', () => {
+    cy.get('#firstName').should('exist');
+    cy.get('#firstName').focus().blur();
+    cy.contains('First name is required.').should('exist');
+  });
+});

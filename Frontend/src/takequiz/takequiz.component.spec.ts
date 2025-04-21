@@ -134,3 +134,4 @@ describe('TakeQuizComponent', () => {
     expect(component.currentQuestionIndex).toBe(0);
   });
 });
+

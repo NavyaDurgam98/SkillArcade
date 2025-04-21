@@ -65,11 +65,11 @@ describe('UserProfileComponent', () => {
   it('should load user profile successfully', () => {
     component.loadUserProfile();
 
-    const profileReq = httpMock.expectOne('http://localhost:8080/userprofile?user_id=123');
+    const profileReq = httpMock.expectOne('http://localhost:8080/api/userprofile?user_id=123');
     expect(profileReq.request.method).toBe('GET');
     profileReq.flush(mockProfile);
 
-    const statsReq = httpMock.expectOne('http://localhost:8080/leaderboard?user_id=123');
+    const statsReq = httpMock.expectOne('http://localhost:8080/api/leaderboard?user_id=123');
     expect(statsReq.request.method).toBe('GET');
     statsReq.flush(mockStats);
 
@@ -84,7 +84,7 @@ describe('UserProfileComponent', () => {
   it('should handle profile load error', () => {
     component.loadUserProfile();
 
-    const profileReq = httpMock.expectOne('http://localhost:8080/userprofile?user_id=123');
+    const profileReq = httpMock.expectOne('http://localhost:8080/api/userprofile?user_id=123');
     profileReq.error(new ErrorEvent('Network error'));
 
     expect(component.isLoading).toBeFalse();
@@ -94,10 +94,10 @@ describe('UserProfileComponent', () => {
   it('should handle stats load error', () => {
     component.loadUserProfile();
 
-    const profileReq = httpMock.expectOne('http://localhost:8080/userprofile?user_id=123');
+    const profileReq = httpMock.expectOne('http://localhost:8080/api/userprofile?user_id=123');
     profileReq.flush(mockProfile);
 
-    const statsReq = httpMock.expectOne('http://localhost:8080/leaderboard?user_id=123');
+    const statsReq = httpMock.expectOne('http://localhost:8080/api/leaderboard?user_id=123');
     statsReq.error(new ErrorEvent('Network error'));
 
     expect(component.isLoading).toBeFalse();
@@ -110,7 +110,7 @@ describe('UserProfileComponent', () => {
 
     expect(component.isLoading).toBeFalse();
     expect(component.profileLoadError).toBeTrue();
-    httpMock.expectNone('http://localhost:8080/userprofile?user_id=');
+    httpMock.expectNone('http://localhost:8080/api/userprofile?user_id=');
   });
 
   it('should use default values when stats are missing', () => {
@@ -121,10 +121,10 @@ describe('UserProfileComponent', () => {
 
     component.loadUserProfile();
 
-    const profileReq = httpMock.expectOne('http://localhost:8080/userprofile?user_id=123');
+    const profileReq = httpMock.expectOne('http://localhost:8080/api/userprofile?user_id=123');
     profileReq.flush(mockProfile);
 
-    const statsReq = httpMock.expectOne('http://localhost:8080/leaderboard?user_id=123');
+    const statsReq = httpMock.expectOne('http://localhost:8080/api/leaderboard?user_id=123');
     statsReq.flush(incompleteStats);
 
     expect(component.userProfile?.quizzes_taken).toBe('Not Found');
