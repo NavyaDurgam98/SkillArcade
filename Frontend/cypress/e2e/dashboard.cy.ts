@@ -74,6 +74,10 @@ describe('Dashboard Page Tests', () => {
       cy.get('#aboutModal').should('be.visible');
       cy.contains('About SkillArcade').should('exist');
     });
+    it('Should show cards in a responsive layout (basic check)', () => {
+        cy.viewport(375, 667); // iPhone 6/7/8 size
+        cy.get('.card').should('be.visible');
+      });
   
     it('Should show correct image paths in img src attributes', () => {
       const expectedImages = [
@@ -94,9 +98,6 @@ describe('Dashboard Page Tests', () => {
       });
     });
   
-    it('Should show cards in a responsive layout (basic check)', () => {
-      cy.viewport(375, 667); // iPhone 6/7/8 size
-      cy.get('.card').should('be.visible');
-    });
+   
   });
   

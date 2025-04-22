@@ -1,7 +1,11 @@
 [
     {
-      "category_id": "1",
-      "category_name": "Web Development",
-      "imgPath": "web-dev.jpg"
+      "category": "Computer Science",
+      "imgPath": "computerscience.jpg"
+    },
+    {
+      "category": "Cloud Computing",
+      "imgPath": "cloudcomputing.jpg"
     }
   ]
+  
