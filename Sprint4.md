@@ -28,27 +28,6 @@
  -Logging out removes the token from local storage and blocks further access until the user logs in again.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Backend Testing ([List of BackEnd Unit Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/86))
-
-
-
-
 ### Frontend Development
 
 
@@ -72,9 +51,182 @@
 - User Password are securely encrypted using Bcrypt package.
 - Encrypted password is stored in the mongodb document.
 - Whenever a user tries to login with username and password , the input password is matched with the decryoted password in the mongodb document.
-  
 
-### Frontend Testing:([[List of Frontend Unit Tests](https://github.com/NavyaDurgam98/SkillArcade/issues/84)](https://github.com/NavyaDurgam98/SkillArcade/issues/84))
+# Frontend Tests
+
+### 1. **Unit Tests**
+
+#### **LeaderboardComponent**
+- should display leaderboard data in the table  
+- should sort leaderboard data correctly  
+- should toggle sorting order on column click  
+- should create the component  
+- should load leaderboard data on init  
+- should handle API error gracefully  
+
+#### **DashboardComponent**
+- should call goToCategory with correct parameter  
+- should display categories correctly  
+
+#### **NavbarComponent**
+- should call logout() and navigate to /login  
+- should create the NavbarComponent  
+- should call openAbout() and show the modal  
+
+#### **CategoryComponent**
+- should call goToQuizTopic() with correct subcategory when button is clicked  
+- should create the category component  
+- should display the correct number of subcategory cards  
+- should display correct subcategory names  
+- should display no subcategories if the API returns an empty array  
+
+#### **LoginComponent**
+- should initialize the form with empty fields  
+- should show "Login" title initially  
+- should validate required password field  
+- should create the component  
+- should toggle to Forgot Password view  
+- should show error message if form submission fails  
+- should enable submit button if form is valid  
+- should validate required username field  
+- should call onSubmit() when form is submitted  
+- should navigate to signup page when clicking "Sign up here"  
+
+#### **UserProfileComponent**
+- should initialize with default profile  
+- should load user profile successfully  
+- should handle profile load error  
+- should create  
+- should use default values when stats are missing  
+- should handle stats load error  
+- should handle missing user ID  
+
+#### **QuizComponent**
+- should display correct quiz topic names  
+- should display no quiz topics if the API returns an empty array  
+- should create the quiz component  
+- should call takeQuiz() when the button is clicked  
+- should display the correct number of quiz topic cards  
+
+#### **TakequizService**
+- should submit quiz results  
+- should handle errors when fetching quiz data  
+- should be created  
+- should fetch quiz data for a given topic  
+- should fetch quiz topics for a category and subcategory  
+
+#### **TakeQuizComponent**
+- should select an answer  
+- should increment question index on next question  
+- should check and increase score if correct answer is selected  
+- should create the component  
+- should retrieve route parameters on initialization  
+- should load quiz data from service  
+- should reset the quiz on retry  
+- should reset quiz data when closing modal  
+- should navigate to a new quiz topic when selecting a topic  
+- should return correct progress width  
+- should detect last question correctly  
+
+#### **SignupComponent**
+- should initialize the form with empty fields  
+- should display error message on signup failure  
+- should validate email field  
+- should call onSubmit() when form is submitted  
+- should create the component  
+- should validate required fields  
+- should display success message on successful signup  
+- should validate password minimum length  
+- should enable submit button when form is valid  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Backend Unit Tests
+
+### 1. **LeaderboardServiceTestSuite**
+- TestGetLeaderboardService
+  - success_top10
+  - success_user_rank
+  - user_not_found
+  - invalid_user_id_format
+  - aggregate_error
+
+### 2. **FetchCategories**
+- success_with_results
+- success_no_results
+- case_insensitive_search
+- database_error
+- decoding_error
+
+### 3. **UserLoginService**
+- user_not_found
+- invalid_password
+- invalid_user_id_format
+
+### 4. **QuizQuestionServiceTestSuite**
+- TestFetchQuizQuestions
+  - success
+  - not_found
+  - database_error
+
+### 5. **FetchQuizTopics**
+- success_with_results
+- success_no_results
+- search_with_filtered_results
+- subcategory_not_found
+- database_error
+
+### 6. **UserRegistrationService**
+- success
+- email_already_exists
+- failed_to_hash_password
+- insert_error
+
+### 7. **FetchSubCategories**
+- success_with_results
+- success_no_results
+- search_with_filtered_results
+- category_not_found
+- database_error
+
+### 8. **SubmitQuizServiceTestSuite**
+- TestSubmitQuizService
+  - success_new_user_score
+  - success_update_existing_quiz
+  - invalid_user_id_format
+  - invalid_quiz_topic_id_format
+  - insert_failure
+  - update_failure
+
+### 9. **UserProfileServiceTestSuite**
+- TestGetUserProfileService
+  - success
+  - user_not_found
+  - invalid_user_id_format
+
+### 10. **UserHistoryServiceTestSuite**
+- TestGetUserHistoryService
+  - success_user_history_found
+  - invalid_user_id_format
+  - user_not_found_or_no_history
+
+
+
+
+  
 
 
 
