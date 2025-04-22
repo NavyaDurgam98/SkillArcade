@@ -1,18 +1,18 @@
 package services
 
 import (
-	"BACKEND/Data"
 	"BACKEND/models"
 	"context"
 	"errors"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func UserRegistrationService(c context.Context, user *models.UserRegister) (string, error) {
+func UserRegistrationService(c context.Context, collection *mongo.Collection, user *models.UserRegister) (string, error) {
 	// Access MongoDB collection
-	userDetailsCollection := Data.GetCollection("SkillArcade", "UserDetails")
+	userDetailsCollection := collection
 
 	// Check if email already exists in DB
 	var existingUser bson.M

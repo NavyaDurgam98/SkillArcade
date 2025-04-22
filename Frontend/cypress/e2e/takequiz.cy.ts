@@ -1,92 +1,90 @@
-// describe('Takequiz Component', () => {
-//     beforeEach(() => {
-//       // Visit the takequiz page for a given category, subcategory, and topic
-//       cy.visit('/takequiz/Science/Physics/Gravity');
-      
-//       // Ensure quiz topics are loaded before moving on
-//       cy.get('.quiz-sidebar h3', { timeout: 10000 }).should('exist'); // Wait for the sidebar h3 (category > subcategory)
-//       cy.get('.quiz-sidebar ul li', { timeout: 10000 }).should('have.length.greaterThan', 0); // Wait for the quiz topics to be listed
-//     });
+describe('TakeQuiz Page', () => {
+    beforeEach(() => {
+      cy.visit('/takequiz'); // Ensure you're on the takequiz page before each test
+    });
   
-//     it('should load the quiz topics list', () => {
-//       cy.get('.quiz-sidebar h3').should('contain', 'Science > Physics'); // Ensure the correct category and subcategory are displayed
-//       cy.get('.quiz-sidebar ul li').should('have.length.greaterThan', 0); // Ensure quiz topics are listed
-//     });
+    it('should display the initial welcome message', () => {
+      cy.get('.quiz-content h2').should('contain', 'Welcome to the Quizzes');
+    });
   
-//     it('should start the quiz when clicking the start button', () => {
-//       // Wait for the start button to be visible
-//       cy.get('.start-quiz-btn', { timeout: 10000 }).should('be.visible'); 
-//       cy.get('.start-quiz-btn').click(); // Click the start button
+    it('should show the topic selection sidebar', () => {
+      cy.get('.quiz-sidebar').should('be.visible');
+      cy.get('.quiz-sidebar h3').should('exist');
+      cy.get('.quiz-sidebar li').should('have.length.gt', 0); // Ensure there are quiz topics
+    });
   
-//       // Verify that the quiz has started
-//       cy.get('.quiz-timer').should('exist'); // Timer should be visible
-//       cy.get('.quiz-progress').should('exist'); // Progress bar should be visible
-//       cy.get('.question-text').should('exist'); // Question text should be visible
-//     });
+    it('should start a quiz when clicking on a topic', () => {
+      cy.get('.quiz-sidebar li').first().click(); // Click the first topic
+      cy.get('.quiz-content h2').should('contain', 'Welcome to the Quiz of');
+      cy.get('.start-quiz-btn').click(); // Click to start the quiz
+      cy.get('.quiz-timer').should('be.visible'); // Verify timer shows up
+      cy.get('.question-text').should('be.visible'); // Verify first question is displayed
+    });
   
-//     it('should allow answering a question and move to the next one', () => {
-//       cy.get('.start-quiz-btn').click(); // Start quiz
+    it('should allow navigating through quiz questions', () => {
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.start-quiz-btn').click();
+      cy.get('.option-btn').first().click(); // Select first option for the question
+      cy.get('.next-btn').click(); // Go to next question
+      cy.get('.quiz-progress span').should('contain', 'Question 2/'); // Check progress
+    });
   
-//       // Wait for the question to load
-//       cy.get('.question-text').should('exist'); 
+    it('should display the completion modal after answering the last question', () => {
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.start-quiz-btn').click();
+      cy.get('.option-btn').first().click();
+      cy.get('.next-btn').click(); // Answer first question
+      cy.get('.option-btn').first().click(); // Answer second question
+      cy.get('.submit-btn').click(); // Submit the quiz
+      cy.get('.modal-content').should('be.visible'); // Verify modal appears upon completion
+    });
   
-//       // Select an answer (first option)
-//       cy.get('.option-btn').first().click();
-//       cy.get('.next-btn').should('not.be.disabled'); // Next button should be enabled after selecting an answer
+    it('should show score in the completion modal', () => {
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.start-quiz-btn').click();
+      cy.get('.option-btn').first().click();
+      cy.get('.next-btn').click(); // Answer first question
+      cy.get('.option-btn').first().click(); // Answer second question
+      cy.get('.submit-btn').click(); // Submit the quiz
+      cy.get('.modal-content .score').should('exist'); // Verify score is displayed
+    });
   
-//       // Click next to move to the next question
-//       cy.get('.next-btn').click();
+    it('should show an error message if quiz data is not available', () => {
+      cy.intercept('GET', '**/quizdata/*', { statusCode: 404 }).as('quizDataRequest'); // Mock 404 error
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.start-quiz-btn').click();
+      cy.wait('@quizDataRequest');
+      cy.get('.error-message').should('contain', 'Unable to load quiz data. Please try again later.');
+    });
   
-//       // Verify the next question is displayed
-//       cy.get('.question-text').should('exist');
-//     });
+    it('should allow users to view question options', () => {
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.start-quiz-btn').click();
+      cy.get('.question-text').should('be.visible');
+      cy.get('.option-btn').should('have.length.greaterThan', 1); // Verify multiple options exist for a question
+    });
   
-//     it('should allow submitting the quiz', () => {
-//       cy.get('.start-quiz-btn').click(); // Start quiz
+    it('should navigate to the results page after completing the quiz', () => {
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.start-quiz-btn').click();
+      cy.get('.option-btn').first().click(); // Answer the first question
+      cy.get('.next-btn').click(); // Answer the next question
+      cy.get('.submit-btn').click(); // Submit quiz
+      cy.url().should('include', '/results'); // Verify the user is redirected to results page
+    });
+
+    it('should show a confirmation message if the quiz is resumed', () => {
+      // Assuming a user can resume a quiz
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.resume-quiz-btn').click(); // Click to resume quiz
+      cy.get('.confirmation-modal').should('be.visible'); // Confirm resume modal appears
+      cy.get('.confirmation-modal .message').should('contain', 'Are you sure you want to resume the quiz?');
+    });
   
-//       // Wait for the question to load
-//       cy.get('.question-text').should('exist');
-  
-//       // Select an answer
-//       cy.get('.option-btn').first().click();
-  
-//       // Submit the quiz on the last question
-//       cy.get('.submit-btn').click();
-  
-//       // Verify the modal with the score is shown
-//       cy.get('.modal-overlay').should('exist');
-//       cy.get('.modal-content h2').should('contain', 'Quiz Completed!');
-//     });
-  
-//     it('should show time warning when only 1 minute is left', () => {
-//       cy.get('.start-quiz-btn').click(); // Start quiz
-  
-//       // Set up the timer to run and trigger time warning
-//       cy.window().then((win) => {
-//         cy.stub(win, 'setInterval').callsFake((callback) => {
-//           callback(); // Trigger callback immediately for testing
-//         });
-//       });
-  
-//       // Wait for the warning to show
-//       cy.get('.time-warning-modal').should('exist');
-//       cy.get('.time-warning-modal p').should('contain', '⚠️ Only 1 minute left!');
-//     });
-  
-//     it('should retry the quiz after completion', () => {
-//       cy.get('.start-quiz-btn').click(); // Start quiz
-  
-//       // Select an answer and submit
-//       cy.get('.option-btn').first().click();
-//       cy.get('.submit-btn').click();
-  
-//       // Verify the quiz modal appears and retry button is visible
-//       cy.get('.modal-overlay').should('exist');
-//       cy.get('.retry-btn').click(); // Click retry
-  
-//       // Verify that the quiz resets (ensure first question is displayed again)
-//       cy.get('.question-text').should('exist');
-//       cy.get('.option-btn').first().should('not.have.class', 'selected'); // Ensure no option is pre-selected
-//     });
-//   });
-  
+    it('should navigate back to quiz topics from the quiz', () => {
+      cy.get('.quiz-sidebar li').first().click();
+      cy.get('.start-quiz-btn').click();
+      cy.get('.back-to-topics-btn').click(); // Click to go back to quiz topics
+      cy.url().should('include', '/takequiz'); // Verify we're back to the quiz topics page
+    });
+  });

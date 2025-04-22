@@ -42,4 +42,7 @@ export class NavbarComponent implements OnInit {
 navigateToLeaderBoard(){
     this.router.navigate(['/leaderboard']);
   }
+navigateToDashboard(){
+  this.router.navigate(['/dashboard']);
+}
 }
