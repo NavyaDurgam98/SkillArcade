@@ -1,34 +1,34 @@
 # Sprint 4 Report
 
 
-## Visual Demo
+# Visual Demo
 
 [Watch the demo video](https://tinyurl.com/mw56549p)
 
 
 
-## Detailed Devlopment
+# Detailed Development
 
-# Backend Development
+## Backend Development
 ### 1. **AUTHENTICATION & ROUTE PROTECTION**  
--This application uses JWT (JSON Web Token) authentication to ensure that only authenticated users can access secure backend APIs and restricted pages in the Angular frontend.
+- This application uses JWT (JSON Web Token) authentication to ensure that only authenticated users can access secure backend APIs and restricted pages in the Angular frontend.
 
 ### **Backend Protection**:
- -JWTs are generated upon successful login and must be included in the Authorization header (as a Bearer token) for all /api/* routes. The Go backend verifies the token and rejects unauthorized access.
+- JWTs are generated upon successful login and must be included in the Authorization header (as a Bearer token) for all /api/* routes. The Go backend verifies the token and rejects unauthorized access.
 
 ### **Frontend Route Guards**:
- -Angular’s AuthGuard is used with canActivate to protect application routes like /dashboard, /profile, /categories, etc. Unauthenticated users are automatically redirected to the login page.
+- Angular’s AuthGuard is used with canActivate to protect application routes like /dashboard, /profile, /categories, etc. Unauthenticated users are automatically redirected to the login page.
 
 ### **Token Handling**:
- -Tokens are stored securely in localStorage on the client.
- -An Angular HTTP interceptor automatically attaches the token to all outgoing API requests.
+- Tokens are stored securely in localStorage on the client.
+- An Angular HTTP interceptor automatically attaches the token to all outgoing API requests.
 
 
  ### **Logout Flow**:
- -Logging out removes the token from local storage and blocks further access until the user logs in again.
+- Logging out removes the token from local storage and blocks further access until the user logs in again.
 
 
-### Frontend Development
+## Frontend Development
 
 
 ## Features  
@@ -345,7 +345,7 @@ GET /leaderboard?user_id=679d5a260264697ca72d7c4a
 ```json
 {
   "rank": 5,
-  "username": "JohnDoe",
+  "username": "SKonduru",
   "total_score": 11,
   "quizzes_taken": 2
 }
@@ -456,10 +456,10 @@ GET /userprofile?user_id=679d5a260264697ca72d7c4a
 **Example Response:**
 ```json
 {
-  "username": "JohnDoe",
-  "email": "john.doe@example.com",
-  "first_name": "John",
-  "last_name": "Doe"
+  "username": "SKonduru",
+  "email": "konduru.s@example.com",
+  "first_name": "Suppi",
+  "last_name": "Konduru"
 }
 ```
 
