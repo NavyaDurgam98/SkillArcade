@@ -1,8 +1,10 @@
 # Sprint 4 Report
 
 
-## Visual Demo Links
-- 
+## Visual Demo
+
+[Watch the demo video](https://tinyurl.com/mw56549p)
+
 
 
 ## Detailed Devlopment
