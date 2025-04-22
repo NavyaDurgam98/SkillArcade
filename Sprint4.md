@@ -140,6 +140,69 @@
 - should enable submit button when form is valid  
 
 
+### **Cypress End-to-End (E2E) Tests Documentation**
+
+## 1. SignUp Page
+- Submits valid form successfully
+- Shows errors on empty form submission
+- Rejects invalid email formats
+- Rejects password shorter than 6 characters
+- Shows mismatch error for password/confirmPassword
+- Accepts long but valid names and usernames
+- Should not allow future DOB (HTML native check)
+- Displays error on server failure
+- Does not show touched error until field is interacted with
+
+## 2. Login Page
+- Should display login form correctly
+- Should show validation errors for empty fields
+- Should log in successfully with valid credentials
+- Should show error message on invalid login
+- Should switch to forgot password mode
+- Should validate email field in forgot password
+- Should send forgot password request successfully
+- Should show error if forgot password request fails
+- Should navigate to signup page when clicking on "New user? Sign up here"
+
+## 3. Dashboard Page
+- Should display the correct number of category cards
+- Should display correct category titles on each card
+- Should display an image for each category card
+- Should have a Sub Topics button on every card
+- Should navigate to correct category page when Sub Topics is clicked
+- Should not show About modal by default
+- Should open About modal when openAbout is triggered manually
+- Should show cards in a responsive layout (basic check)
+- Should show correct image paths in `img src` attributes
+
+## 4. Category Page
+- Should call API and display filtered subcategories when searchText = "comp"
+- Should display correct category titles from mock data
+- Should display correct images for each category
+- Should navigate to quiz topic page on clicking a subcategory card
+- Should display "No results found" when no match is returned
+
+## 5. Navbar Component
+- Should render the logo, search input, About button, and profile dropdown
+- Should allow typing into the search box and trigger the input event
+- Should open the About modal when About button is clicked
+- Should navigate to User Profile when dropdown item is clicked
+- Should navigate to Leader Board when dropdown item is clicked
+- Should remove tokens and redirect to login on logout
+
+## 6. TakeQuiz Page
+- Should display the initial welcome message
+- Should show the topic selection sidebar
+- Should start a quiz when clicking on a topic
+- Should allow navigating through quiz questions
+- Should display the completion modal after answering the last questions
+- Should show score in the completion modal
+- Should show an error message if quiz data is not available
+- Should allow users to view question options
+- Should navigate to the results page after completing the quiz
+- Should show a confirmation message if the quiz is resumed
+- Should navigate back to quiz topics from the quiz
+
 
 
 
