@@ -1,7 +1,6 @@
 package services
 
 import (
-	"BACKEND/Data"
 	"BACKEND/models"
 	"BACKEND/utils"
 	"context"
@@ -9,13 +8,14 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
 
-func UserLoginService(c context.Context, user *models.UserLogin) (string, string, error) {
+func UserLoginService(c context.Context, collection *mongo.Collection, user *models.UserLogin) (string, string, error) {
 
 	// Access MongoDB collection
-	userDetailsCollection := Data.GetCollection("SkillArcade", "UserDetails")
+	userDetailsCollection := collection
 
 	// check if user exists in DB
 	var userExists bson.M
