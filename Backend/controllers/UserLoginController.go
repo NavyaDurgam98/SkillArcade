@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/models"
 	"BACKEND/services"
 	"net/http"
@@ -17,8 +18,9 @@ func UserLogin(c *gin.Context) {
 		return
 	}
 
+	collection := Data.GetCollection("SkillArcade", "UserDetails")
 	// Authenticate user and generate JWT
-	token, userID, err := services.UserLoginService(c.Request.Context(), &loginData)
+	token, userID, err := services.UserLoginService(c.Request.Context(), collection, &loginData)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return

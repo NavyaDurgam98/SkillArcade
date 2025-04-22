@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"BACKEND/Data"
 	"BACKEND/models"
 	"BACKEND/services"
 	"net/http"
@@ -16,8 +17,9 @@ func UserRegister(c *gin.Context) {
 		return
 	}
 
+	collection := Data.GetCollection("SkillArcade", "UserDetails")
 	//connect to service to validate in db
-	_, err := services.UserRegistrationService(c.Request.Context(), &userData)
+	_, err := services.UserRegistrationService(c.Request.Context(), collection, &userData)
 	if err != nil {
 		c.JSON(http.StatusConflict, gin.H{"error": err.Error()})
 		return
