@@ -73,8 +73,11 @@ SkillArcade/
 
 ---
 
-###  Test Login Credentials
-Use the following test credentials to log in:
+
+## HOW TO USE THE APPLICATION
+
+### Login
+Use the provided test credentials to log in:
 ```json
 {
   "username": "skonduru",
@@ -82,4 +85,44 @@ Use the following test credentials to log in:
 }
 ```
 
+---
+
+### Take a Quiz
+1. **Choose a Category** from the dashboard.
+2. **Select a Subcategory** under the chosen category.
+3. **Pick a Quiz Topic** to begin the quiz.
+4. **Answer Questions** presented one at a time.
+5. **Submit Quiz** to view your score.
+
+---
+
+### View Leaderboard
+- Click the **Profile Icon** on the top right of the navigation bar.
+- Select **Leaderboard** from the dropdown to view rankings.
+
+---
+
+### View User Profile
+- Click the **Profile Icon** on the navigation bar.
+- Choose **User Profile** to see your quiz history and profile details.
+
+---
+
+### Search
+- Use the **Search Icon** on the navigation bar to search by:
+  - Category
+  - Subcategory
+  - Quiz Topic
+
+---
+
+### About the Application
+- Click the **About** button on the navigation bar to view details about the SkillArcade platform.
+
+---
+
+### Logout
+- Use the **Profile Icon** → **Logout** option to safely sign out of the app.
+
+---
 
